@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+:root {
+    --zen-bg: #F7F5F0;
+    --zen-card: #FFFFFF;
+
+    --zen-primary: #8FA28F;
+    --zen-primary-hover: #758875;
+
+    --sage-light: #E8EDE8;
+    --sage-mid: #C1D0C1;
+    --sage-dark: #8FA28F;
+
+    --zen-text-dark: #3E463E;
+    --zen-text-muted: #9A9A92;
+}
+
+.card-sage-light { background-color: var(--sage-light); color: var(--zen-text-dark); }
+.card-sage-mid   { background-color: var(--sage-mid);   color: var(--zen-text-dark); }
+.card-sage-dark  { background-color: var(--sage-dark);  color: #FFFFFF; }
+.card-sage-dark .text-muted { color: #E0E7E0 !important; }
+
+body {
+    background-color: var(--zen-bg);
+    color: var(--zen-text-dark);
+    font-family: 'Nunito', sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--zen-card);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding-top: 1.5rem;
+}
+
+.btn-primary {
+    background-color: var(--zen-primary);
+    border-color: var(--zen-primary);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--zen-primary-hover) !important;
+    border-color: var(--zen-primary-hover) !important;
+    box-shadow: 0 6px 15px rgba(143, 162, 143, 0.3) !important;
+}
+
+.form-control, .form-select {
+    border-radius: 12px;
+    border: 1.5px solid #EAE8E1;
+    background-color: #FCFBF8;
+    padding: 12px 16px;
+    color: var(--zen-text-dark);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--zen-primary);
+    box-shadow: 0 0 0 4px rgba(143, 162, 143, 0.15);
+    background-color: #FFFFFF;
+}
+
+.text-muted {
+    color: var(--zen-text-muted) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--zen-text-dark);
+}
+
+/* Nasconde il radio button ma lo mantiene funzionante */
+.piano-radio {
+    display: none;
+}
+
+/* Quando il radio button viene selezionato (:checked), cambia lo stile della card successiva */
+.piano-radio:checked + .piano-card {
+    border: 3px solid var(--zen-primary); /* Bordo colorato per indicare la selezione */
+    transform: scale(1.02);               /* Effetto "zoom" leggero */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Gestione del badge "Selezionato" */
+.badge-selezione {
+    display: none; /* Nascosto di default */
+}
+.piano-radio:checked + .piano-card .badge-selezione {
+    display: inline-block; /* Appare solo se la card è selezionata */
+}
+
+/* Migliora il cursore per far capire che è cliccabile */
+.piano-card {
+    cursor: pointer;
+}
