@@ -34,6 +34,13 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.cardlogin {
+    border: none;
+    border-radius: 20px;
+    background-color: var(--zen-card);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
@@ -87,27 +94,53 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--zen-text-dark);
 }
 
-/* Nasconde il radio button ma lo mantiene funzionante */
 .piano-radio {
     display: none;
 }
 
-/* Quando il radio button viene selezionato (:checked), cambia lo stile della card successiva */
 .piano-radio:checked + .piano-card {
-    border: 3px solid var(--zen-primary); /* Bordo colorato per indicare la selezione */
-    transform: scale(1.02);               /* Effetto "zoom" leggero */
+    border: 3px solid var(--zen-primary);
+    transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Gestione del badge "Selezionato" */
 .badge-selezione {
-    display: none; /* Nascosto di default */
+    display: none;
 }
 .piano-radio:checked + .piano-card .badge-selezione {
-    display: inline-block; /* Appare solo se la card è selezionata */
+    display: inline-block;
 }
 
-/* Migliora il cursore per far capire che è cliccabile */
 .piano-card {
     cursor: pointer;
+}
+
+.zen-navbar {
+    background-color: var(--zen-card);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    padding: 15px 30px;
+}
+
+.zen-navbar .navbar-brand {
+    color: var(--zen-text-dark) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.zen-navbar .nav-link {
+    color: var(--zen-text-dark) !important;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.zen-navbar .nav-link:hover {
+    color: var(--zen-primary) !important;
+    transform: translateY(-2px);
+}
+
+.zen-navbar .nav-link.active {
+    color: var(--zen-primary) !important;
+    border-bottom: 2px solid var(--zen-primary);
 }
