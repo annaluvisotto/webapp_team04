@@ -220,8 +220,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pink_elem {
-    background-color: var(--pastel-pink);
-    
+    background-color: var(--winx-pastel-pink);
+    border: 2px solid;
+    border-radius: 8px;
+    border-color: var(--winx-primary-hover);
+    outline: none;
 }
 /* Modifica del pulsante toggle (hamburger menu) per allinearlo al tema */
 .custom-toggler {
