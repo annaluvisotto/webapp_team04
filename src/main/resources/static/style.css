@@ -13,6 +13,8 @@
 
     --zen-text-dark: #3E463E;
     --zen-text-muted: #9A9A92;
+
+    --pink: #f69cc9;
 }
 
 .card-sage-light { background-color: var(--sage-light); color: var(--zen-text-dark); }
@@ -143,4 +145,8 @@ h1, h2, h3, h4, h5, h6 {
 .zen-navbar .nav-link.active {
     color: var(--zen-primary) !important;
     border-bottom: 2px solid var(--zen-primary);
+}
+
+.pink_elem {
+    background-color: var(--pink);
 }
