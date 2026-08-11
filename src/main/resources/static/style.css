@@ -221,6 +221,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .pink_elem {
     background-color: var(--pastel-pink);
+    
 }
 /* Modifica del pulsante toggle (hamburger menu) per allinearlo al tema */
 .custom-toggler {
