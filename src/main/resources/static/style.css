@@ -232,3 +232,39 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px;
     background-color: var(--winx-card);
 }
+
+/* Componente Architetturale: Card Profilo Flottante */
+.winx-profile-card {
+    background-color: var(--winx-card) !important;
+    border: 3px dashed var(--winx-primary) !important;
+    border-radius: 24px !important;
+    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+    /* Evita conflitti di rendering sui margini interni nativi della card */
+    border-collapse: separate;
+}
+
+/* Modifica del Nodo Separatore (HR) */
+/* Modifica del Nodo Separatore (HR) */
+hr.winx-divider {
+    /* Riassegnazione della dipendenza cromatica al rosa primario */
+    border-top: 3px dashed var(--winx-primary) !important;
+    /* Reset rigoroso dell'opacità per sovrascrivere le specifiche di Bootstrap */
+    opacity: 1 !important;
+    margin: 1.5rem 0;
+}
+
+/* Override delle proprietà di riempimento del glifo vettoriale */
+.winx-avatar-svg {
+    fill: var(--winx-primary);
+    /* Utilizzo del motore di compositing per applicare un'ombra che segue i contorni del vettore */
+    filter: drop-shadow(4px 4px 0px rgba(176, 224, 230, 0.5));
+}
+
+/* Soppressione della mutazione topologica ereditata dalla classe .card base */
+.winx-profile-card:hover {
+    /* Ripristina la matrice di trasformazione allo stato di identità spaziale */
+    transform: none !important;
+
+    /* Congela il calcolo vettoriale dell'ombra, mantenendolo identico allo stato di riposo */
+    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+}
