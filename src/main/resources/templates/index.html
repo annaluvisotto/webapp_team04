@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Winx fitness club</title>
@@ -29,15 +29,17 @@
     </div>
 </div>  
 
+
+<!-- tramite thymeleaf e controller serve gestire gli spostamenti alle altre pagine pubbliche -->
 <div class="d-flex justify-content-evenly mt-3">
     <div>
-        <a href="signup.html" class="btn btn-primary">Registrati</a>
+        <a th:href="@{/signup}" class="btn btn-primary">Registrati</a>
     </div>
     <div>
-        <a href="login.html" class="btn btn-primary">Inizia Allenamento</a>
+        <a th:href="@{/login}" class="btn btn-primary">Inizia Allenamento</a>
     </div>
     <div>
-        <a href="contatti.html" class="btn btn-primary">Contattaci</a>
+        <a th:href="@{/contatti}" class="btn btn-primary">Contattaci</a>
     </div>
 </div>
 </body>
