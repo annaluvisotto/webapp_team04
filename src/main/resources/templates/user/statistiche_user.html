@@ -11,39 +11,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-light">
 
 <div class="app-layout">
 
-
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh; margin-top: 80px;">
 
         <div class="text-center">
-            <h3 class="display-8 fw-bold mb-3" style="color: var(--zen-text-dark);">
-                Qui puoi visualizzare il numero medio di allenamenti per i programmi predfiniti
+            <h3 class="display-8 fw-bold mb-3" style="color: var(--winx-text-dark);">
+                Qui puoi visualizzare il numero medio di allenamenti per ogni programma
             </h3>
 
-        <div class="card overflow-hidden shadow-sm" style="transform: none; border: 2px solid var(--winx-accent);">
-    <div class="table-responsive">
-        <table class="table align-middle mb-0 text-center">
-            <thead class="pink_elem">
-                <tr>
-                    <th scope="col" class="py-3">Programma </th>
-                    <th scope="col" class="py-3">Media Allenamenti utenti Basic</th>
-                    <th scope="col" class="py-3">Media Allenamenti utenti Pro</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- serve inserire i dati collegando la pagina al db -->
-            </tbody>
-        </table>
-    </div>
+        </div>
 
+        <div class="card overflow-hidden shadow-sm" style="transform: none; border: 2px solid var(--winx-accent);">
+            <div class="table-responsive">
+                <h4 class="text-center mb-4">Frequenza Allenamenti</h4>
+            <div style="position: relative; height: 500px; width: 100%;">
+                <canvas id="istogrammaFrequenze"></canvas> <!-- serve lo script javascript per inserire il contenuto dell'istogramma -->
+            </div>
+        </div>
+
+    </div>
 
     <nav class="navbar navbar-light fixed-top winx-topbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Dashboard Admin</a>
+            <a class="navbar-brand" href="#">Dashboard Basic</a>
 
             <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar"
@@ -60,16 +55,25 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" th:href="@{/dashboard_admin}">Dashboard</a>
+                            <a class="nav-link" aria-current="page" th:href="@{/dashboard_basic}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/profilo}">Visualizza lista utenti</a>
+                            <a class="nav-link" th:href="@{/profilo}">Visualizza profilo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/rimuovi_utenti}">Rimuovi utenti scaduti</a>
+                            <a class="nav-link" th:href="@{/cambio_pw}">Cambio Password</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/statistiche_admin}">Statistiche</a>
+                            <a class="nav-link" th:href="@{/allenamento}">Allenamento</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" th:href="@{/statistiche_user}">Visualizza statistiche</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/upgrade}">Upgrade</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/recensione}">Inserisci recensione</a>
                         </li>
                     </ul>
                 </div>
@@ -79,8 +83,6 @@
 
 </div>
 
-<!-- tramite thymeleaf e controller serve gestire gli spostamenti alle altre pagine della dashboard -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
