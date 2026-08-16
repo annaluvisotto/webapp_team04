@@ -1,3 +1,5 @@
+DROP ALL OBJECTS;
+
 CREATE TABLE IF NOT EXISTS Users(
     ID INT AUTO_INCREMENT PRIMARY KEY,
     username varchar(32) NOT NULL UNIQUE,
@@ -13,7 +15,7 @@ CREATE TABLE IF NOT EXISTS Authorities(
     );
 
 CREATE TABLE IF NOT EXISTS Users_info(
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ID INT PRIMARY KEY,
     nome varchar(32) NOT NULL,
     cognome varchar(32) NOT NULL,
     data_nascita date,

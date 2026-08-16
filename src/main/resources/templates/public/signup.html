@@ -18,8 +18,7 @@
     <h2 class="text-center mb-4">Sign up</h2>
     <h4>Crea il tuo account</h4>
 
-    <!--Da cambiare con action di timeleaf e method post-->
-    <form action="reg_confirmation.html" method="GET" class="needs-validation" id="registrationForm" novalidate>
+    <form th:action="@{/adduser}" method="POST" class="needs-validation" id="registrationForm" novalidate>
 
         <div class="mb-3 mt-3">
             <label for="nome" class="form-label">Nome: <span class="text-danger">*</span></label>
@@ -36,20 +35,20 @@
 
         <div class="mb-3 mt-3">
             <label for="data" class="form-label">Data di nascita: <span class="text-danger">*</span></label>
-            <input type="date" class="form-control" id="data" placeholder="Inserisci la tua data di nascita" name="data"
+            <input type="text" class="form-control" id="data" placeholder="Inserisci la tua data di nascita (GG/MM/AAAA)" name="data"
                    required>
             <div class="invalid-feedback">Campo obbligatorio</div>
         </div>
 
         <div class="mb-3 mt-3">
             <label for="email" class="form-label">Email: <span class="text-danger">*</span></label>
-            <input type="email" class="form-control" id="email" placeholder="Inserisci una mail" name="email" required>
+            <input type="text" class="form-control" id="email" placeholder="Inserisci una mail" name="email" required>
             <div class="invalid-feedback">Campo obbligatorio</div>
         </div>
 
         <div class="mb-3 mt-3">
-            <label for="uname" class="form-label">Username: <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="uname" placeholder="Inserisci uno username" name="uname"
+            <label for="username" class="form-label">Username: <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="username" placeholder="Inserisci uno username" name="username"
                    required>
             <div class="invalid-feedback">Campo obbligatorio</div>
         </div>
@@ -83,7 +82,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="PROVA" class="piano-radio" required>
+                        <input type="radio" name="pianoScelto" value="ROLE_USER_PROVA" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-light">
                             <div class="card-header bg-transparent border-0 pt-4">
@@ -104,7 +103,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="BASIC" class="piano-radio" required>
+                        <input type="radio" name="pianoScelto" value="ROLE_USER_BASIC" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-mid">
                             <div class="card-header bg-transparent border-0 pt-4">
@@ -126,7 +125,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="PRO" class="piano-radio" required>
+                        <input type="radio" name="pianoScelto" value="ROLE_USER_PRO" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-mid">
                             <div class="card-header bg-transparent border-0 pt-4">
@@ -156,8 +155,6 @@
                         <button type="reset" class="btn btn-primary">Reset</button>
                     </div>
                 </div>
-
-
             </div>
         </div>
 

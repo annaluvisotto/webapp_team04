@@ -1,0 +1,1 @@
+SELECT 1; -- non significa nulla, l'ho aggiunto perchè data.sql non può essere vuoto
