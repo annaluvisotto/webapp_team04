@@ -75,4 +75,11 @@
         </plugins>
     </build>
 
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+        <version>5.0.1</version>
+    </dependency>
+
+
 </project>
