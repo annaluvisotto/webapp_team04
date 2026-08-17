@@ -27,15 +27,15 @@ CREATE TABLE IF NOT EXISTS Users_info(
     );
 
 CREATE TABLE IF NOT EXISTS Default_Trainings(
-    ID_Training INT,
     ID_User INT NOT NULL,
+    nome_allenamento varchar(32) NOT NULL,
     esecuzioni INT,
-    PRIMARY KEY (ID_Training, ID_User),
+    PRIMARY KEY (nome_allenamento, ID_User),
     FOREIGN KEY (ID_User) REFERENCES Users(ID)
     );
 
 CREATE TABLE IF NOT EXISTS Personalized_Trainings(
-    ID_Training INT,
+    ID_Training INT AUTO_INCREMENT,
     ID_User INT NOT NULL,
     nome_allenamento varchar(32) NOT NULL,
     esecuzioni INT,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Personalized_Trainings(
     FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE
     );
 
-CREATE TABLE IF NOT EXISTS Personalized_Trainings_info(
+CREATE TABLE IF NOT EXISTS Personalized_Trainings_Info(
     ID_Training INT,
     ID_User INT NOT NULL,
     nome_esercizio varchar(32) NOT NULL,
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS Personalized_Trainings_info(
     numero_ripetizioni INT,
     PRIMARY KEY (ID_Training, ID_User, nome_esercizio), -- l'esercizio è primary key perché gli utenti lo selezionano da una lista (limitata) che fa riferimento al servizio rest
     FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE
+    FOREIGN KEY (ID_Training) REFERENCES Personalized_Trainings(ID_Training) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Reviews(
