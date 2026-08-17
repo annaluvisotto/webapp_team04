@@ -12,16 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
+
 <body>
-<h4 class="text-center mb-4">Registrazione avvenuta con successo!</h4>
-<h6 class="text-center mb-4">Clicca qui per tornare alla home page</h6>
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <h3 class="mb-3">Registrazione avvenuta con successo!</h3>
+    <h6 class="text-muted mb-4">Clicca qui per tornare alla home page</h6>
+    <form th:action="@{/homepage}">
+        <button type="submit" class="btn btn-primary px-4 py-2">Homepage</button>
+    </form>
 
-<!--Da cambiare con action di timeleaf e method post-->
-<form action="homepage.html" method="GET">
-    <div class="text-center">
-        <button class="btn btn-secondary mb-4">homepage</button>
-    </div>
-</form>
-
+</div>
 </body>
+
 </html>
