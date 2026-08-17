@@ -8,12 +8,13 @@
         <version>4.1.0</version>
         <relativePath/> 
     </parent>
-    <groupId>it.unitn.disi</groupId>
-    <artifactId>webapp_team04</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>webapp_team04</name>
-    <description>webapp_team04</description>
     
+    <groupId>it.unitn.disi</groupId>
+    <artifactId>rest_service_team04</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>rest_service_team04</name>
+    <description>rest_service_team04</description>
+
     <developers>
         <developer>
             <name>Anna Luvisotto</name>
@@ -24,25 +25,15 @@
             <email>sofia.cestari@studenti.unitn.it</email>
         </developer>
     </developers>
-    
+
     <properties>
         <java.version>25</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -83,6 +74,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
