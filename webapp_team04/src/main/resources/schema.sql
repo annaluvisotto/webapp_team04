@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Users(
 
 CREATE TABLE IF NOT EXISTS Authorities(
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    username varchar(32) NOT NULL,
+    username varchar(32) NOT NULL UNIQUE,
     authority enum('ROLE_ADMIN', 'ROLE_USER_PROVA', 'ROLE_USER_BASIC', 'ROLE_USER_PRO') NOT NULL,
     FOREIGN KEY (username) REFERENCES Users(username) ON DELETE CASCADE
     );
