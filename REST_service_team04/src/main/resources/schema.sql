@@ -1,5 +1,3 @@
-DROP ALL OBJECTS;
-
 CREATE TABLE IF NOT EXISTS Default_Trainings(
     ID_Training INT AUTO_INCREMENT PRIMARY KEY,
     nome_allenamento varchar(32) NOT NULL,

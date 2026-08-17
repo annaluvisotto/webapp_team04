@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS Personalized_Trainings_Info(
     numero_ripetizioni INT NOT NULL,
     PRIMARY KEY (ID_Training, ID_User, nome_esercizio), -- l'esercizio è primary key perché gli utenti lo selezionano da una lista (limitata) che fa riferimento al servizio rest
     FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE,
-    FOREIGN KEY (ID_Training) REFERENCES Personalized_Trainings(ID_Training) ON DELETE CASCADE
+    FOREIGN KEY (ID_Training, ID_User) REFERENCES Personalized_Trainings(ID_Training, ID_User) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Reviews(
