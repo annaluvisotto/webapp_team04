@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS Reviews CASCADE;
+DROP TABLE IF EXISTS Personalized_Trainings_Info CASCADE;
+DROP TABLE IF EXISTS Personalized_Trainings CASCADE;
+DROP TABLE IF EXISTS Default_Trainings CASCADE;
+DROP TABLE IF EXISTS Users_info CASCADE;
+DROP TABLE IF EXISTS Authorities CASCADE;
+DROP TABLE IF EXISTS Users CASCADE;
+
 CREATE TABLE IF NOT EXISTS Users(
     ID INT AUTO_INCREMENT PRIMARY KEY,
     username varchar(32) NOT NULL UNIQUE,
@@ -18,8 +26,6 @@ CREATE TABLE IF NOT EXISTS Users_info(
     cognome varchar(32) NOT NULL,
     data_nascita date,
     email varchar(32) NOT NULL,
-    username varchar(32) NOT NULL,
-    password varchar(32) NOT NULL,
     data_reg date NOT NULL,
     FOREIGN KEY (ID) REFERENCES Users(ID) ON DELETE CASCADE
     );

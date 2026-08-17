@@ -1,19 +1,27 @@
-package it.unitn.disi.webapp_team04.repositories;
+package it.unitn.disi.webapp_team04.services;
 
 import it.unitn.disi.webapp_team04.pojos.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Repository
-public class UserRepository {
+@Service
+public class CheckUser {
     private final JdbcTemplate jdbcTemplate;
 
-    public UserRepository(JdbcTemplate jdbcTemplate) {
+    public CheckUser(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    //questo controllo verrà eseguito dal controller
+    public boolean checkUsername(String username){
+        String check = "SELECT COUNT(*) FROM Users WHERE Username=?";
+        Integer count = jdbcTemplate.queryForObject(check, Integer.class, username);
+        return (count > 0); //torna true se è già presente un utente con lo stesso username
+    }
+
     public void addUser(User user){
         //per convertire la data di nascita da GG/MM/AAAA a AAAA/MM/GG
         String data_nascita = user.getData_nascita();
@@ -33,7 +41,7 @@ public class UserRepository {
         Integer id = jdbcTemplate.queryForObject(sqlId, Integer.class, user.getUsername());
 
         //inserimento in Users_info
-        String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sqlInfo, id, user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), user.getUsername(), user.getPassword(), java.sql.Date.valueOf(java.time.LocalDate.now()));
+        String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sqlInfo, id, user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), java.sql.Date.valueOf(java.time.LocalDate.now()));
     }
 }

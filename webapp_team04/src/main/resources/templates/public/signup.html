@@ -14,11 +14,14 @@
 </head>
 <body>
 
+<!-- manca lo script javascript per i controlli sull'input -->
 <div class="container mt-3">
     <h2 class="text-center mb-4">Sign up</h2>
     <h4>Crea il tuo account</h4>
 
     <form th:action="@{/adduser}" method="POST" class="needs-validation" id="registrationForm" novalidate>
+
+        <p th:if="${errore}" th:text="${errore}" class="text-danger mt-2"></p>
 
         <div class="mb-3 mt-3">
             <label for="nome" class="form-label">Nome: <span class="text-danger">*</span></label>
@@ -160,66 +163,6 @@
 
     </form>
 </div>
-
-<!-- Da modificare ed estendere, l'ho aggiunto per completezza-->
-<script>
-    (function () {
-        'use strict';
-        var form = document.getElementById('registrationForm');
-        var psw1 = document.getElementById('psw1');
-        var psw2 = document.getElementById('psw2');
-        var psw2Feedback = document.getElementById('psw2-feedback');
-
-        //controlla se le due psw coincidono
-        function validatePsw() {
-            if (psw1.value !== psw2.value) {
-                psw2.setCustomValidity("Errore");
-                psw2Feedback.textContent = "Le password non coincidono";
-            } else {
-                psw2.setCustomValidity("");
-            }
-        }
-
-        psw1.addEventListener('input', validatePsw);
-        psw2.addEventListener('input', validatePsw);
-
-        form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        }, false);
-    })();
-</script>
-
-<script>
-    (function () {
-        'use strict';
-        var form = document.getElementById('registrationForm');
-
-        form.addEventListener('submit', function (event) {
-            var pianoRadios = document.getElementsByName('pianoScelto');
-            var isPianoSelected = Array.from(pianoRadios).some(radio => radio.checked);
-            var pianoFeedback = document.getElementById('piano-feedback');
-
-            if (!form.checkValidity() || !isPianoSelected) {
-                event.preventDefault();
-                event.stopPropagation();
-                if (!isPianoSelected) {
-                    pianoFeedback.style.display = 'block';
-                }
-            }
-            form.classList.add('was-validated');
-        }, false);
-
-        document.querySelectorAll('.piano-radio').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('piano-feedback').style.display = 'none';
-            });
-        });
-    })();
-</script>
 
 </body>
 </html>
