@@ -10,11 +10,16 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<div class="d-flex align-items-center justify-content-center vh-100">
+<body>
 
-    <h1> Hai effettuato il logout correttamente. </h1>
-
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <h3 class="mb-3">Logout avvenuto con successo!</h3>
+    <h6 class="text-muted mb-4">Clicca qui per tornare alla home page</h6>
+    <form th:action="@{/homepage}">
+        <button type="submit" class="btn btn-primary px-4 py-2">Homepage</button>
+    </form>
 </div>
+</body>
 
 </body>
 </html>
