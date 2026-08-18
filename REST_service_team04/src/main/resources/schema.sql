@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS Default_Trainings_Info CASCADE;
+DROP TABLE IF EXISTS Exercises CASCADE;
+DROP TABLE IF EXISTS Default_Trainings CASCADE;
+
 CREATE TABLE IF NOT EXISTS Default_Trainings(
     ID_Training INT AUTO_INCREMENT PRIMARY KEY,
     nome_allenamento varchar(32) NOT NULL
