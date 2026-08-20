@@ -45,4 +45,5 @@ public class CheckUser {
         String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sqlInfo, id, user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), java.sql.Date.valueOf(java.time.LocalDate.now()));
     }
+
 }

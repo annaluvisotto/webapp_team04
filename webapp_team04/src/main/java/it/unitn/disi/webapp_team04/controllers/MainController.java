@@ -3,6 +3,8 @@ package it.unitn.disi.webapp_team04.controllers;
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.repositories.CheckUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,7 @@ public class MainController {
         this.checkUser = checkUser;
     }
 
-    @GetMapping
+    @GetMapping("/index")
     public String index(){
         return "public/index";
     }
@@ -26,22 +28,6 @@ public class MainController {
     @GetMapping("/signup")
     public String signup(){
         return "public/signup";
-    }
-
-    @GetMapping("/mylogin")
-    public String login(){
-        return "public/login";
-    }
-
-    @PostMapping("/login_failure")
-    public String login_failure(Model model){
-        model.addAttribute("errore", "#team_04: That user is not authenticated!");
-        return "public/login";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboard(){
-        return "private/admin/dashboard_admin";
     }
 
     @PostMapping("/adduser")
@@ -74,7 +60,63 @@ public class MainController {
 
     }
 
+    @GetMapping("/mylogin")
+    public String login(){
+        return "public/login";
+    }
 
+    @PostMapping("/login_failure")
+    public String login_failure(Model model){
+        model.addAttribute("errore", "#team_04: That user is not authenticated!");
+        return "public/login";
+    }
 
+    @GetMapping("/dashboard")
+    public String dashboard(Authentication authentication) {
+        String view;
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+            view = "forward:dashboard_admin";
+        else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER_PROVA")))
+            view = "forward:dashboard_prova";
+        else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER_BASIC")))
+            view = "forward:dashboard_basic";
+        else
+            view = "forward:dashboard_pro";
+        return view;
+    }
+
+    @GetMapping("/dashboard_admin")
+    public String dashboard_admin(Authentication authentication, Model model) {
+        model.addAttribute("nome", authentication.getName());
+        return "private/admin/dashboard_admin";
+    }
+
+    @GetMapping("/dashboard_prova")
+    public String dashboard_prova(Authentication authentication, Model model) {
+        model.addAttribute("nome", authentication.getName());
+        return "private/user/dashboard_prova";
+    }
+
+    @GetMapping("/dashboard_basic")
+    public String dashboard_basic(Authentication authentication, Model model) {
+        model.addAttribute("nome", authentication.getName());
+        return "private/user/dashboard_basic";
+    }
+
+    @GetMapping("/dashboard_pro")
+    public String dashboard_pro(Authentication authentication, Model model) {
+        model.addAttribute("nome", authentication.getName());
+        return "private/user/dashboard_pro";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "public/logout_confirmation";
+    }
+
+    @GetMapping("/contatti")
+    public String contatti() {
+        return "public/contatti";
+    }
 
 }
