@@ -20,14 +20,15 @@
 
             <h3 class="card-title text-center mb-4 fw-bold">Login</h3>
 
-            <!--Da cambiare con action di timeleaf (alla dashboard corrispondente) e method post-->
-            <form action="/action_page.php">
+            <p th:if="${errore}" th:text="${errore}" class="text-danger mt-2"></p>
+
+            <form th:action="@{/login}" method="POST">
                 <div class="mb-4">
-                    <input type="text" class="form-control" id="uname" placeholder="Username" name="uname" required>
+                    <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                 </div>
 
                 <div class="mb-4">
-                    <input type="password" class="form-control" id="pwd" placeholder="Password" name="pwd" required>
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100 mt-2">Accedi</button>

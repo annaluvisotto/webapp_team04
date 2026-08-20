@@ -57,16 +57,16 @@
         </div>
 
         <div class="mb-3">
-            <label for="psw1" class="form-label">Password: <span class="text-danger">*</span></label>
-            <input type="password" class="form-control" id="psw1" placeholder="Inseririsci una password" name="psw1"
+            <label for="password" class="form-label">Password: <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" placeholder="Inseririsci una password" name="password"
                    pattern="(?=.*id_04).{8}" required>
             <div class="invalid-feedback">La password deve contenere la parola 'id_04' e dev'essere lunga 8 caratteri
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="psw2" class="form-label">Ripetere la password: <span class="text-danger">*</span></label>
-            <input type="password" class="form-control" id="psw2" placeholder="Inserisci una password" name="psw2"
+            <label for="passwordRipetuta" class="form-label">Ripetere la password: <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="passwordRipetuta" placeholder="Inserisci una password" name="passwordRipetuta"
                    pattern="(?=.*id_04).{8}" required>
             <div class="invalid-feedback" id="psw2-feedback">Le password non coincidono
             </div>
@@ -85,7 +85,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="ROLE_USER_PROVA" class="piano-radio" required>
+                        <input type="radio" name="ruolo" value="ROLE_USER_PROVA" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-light">
                             <div class="card-header bg-transparent border-0 pt-4">
@@ -106,7 +106,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="ROLE_USER_BASIC" class="piano-radio" required>
+                        <input type="radio" name="ruolo" value="ROLE_USER_BASIC" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-mid">
                             <div class="card-header bg-transparent border-0 pt-4">
@@ -128,7 +128,7 @@
 
                 <div class="col-12 col-md-4">
                     <label class="w-100 h-100">
-                        <input type="radio" name="pianoScelto" value="ROLE_USER_PRO" class="piano-radio" required>
+                        <input type="radio" name="ruolo" value="ROLE_USER_PRO" class="piano-radio" required>
 
                         <div class="card h-100 text-center piano-card card-sage-mid">
                             <div class="card-header bg-transparent border-0 pt-4">
