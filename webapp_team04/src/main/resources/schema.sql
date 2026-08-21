@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS Authorities(
 
 CREATE TABLE IF NOT EXISTS Users_info(
     ID INT PRIMARY KEY,
+    username varchar(32) NOT NULL UNIQUE,
     nome varchar(32) NOT NULL,
     cognome varchar(32) NOT NULL,
     data_nascita date,

@@ -2,6 +2,7 @@ package it.unitn.disi.webapp_team04.repositories;
 
 import it.unitn.disi.webapp_team04.pojos.SecurityUser;
 import it.unitn.disi.webapp_team04.pojos.User;
+import it.unitn.disi.webapp_team04.rowmappers.ProfiloRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -12,12 +13,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Repository
-public class CheckUser {
+public class UserRepository {
     private final JdbcTemplate jdbcTemplate;
     private final UserDetailsManager userDetailsManager;
     private final PasswordEncoder passwordEncoder;
 
-    public CheckUser(JdbcTemplate jdbcTemplate, UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
+    public UserRepository(JdbcTemplate jdbcTemplate, UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsManager = userDetailsManager;
@@ -42,8 +43,13 @@ public class CheckUser {
         //inserimento in Users_info, estraendo l'id da Users
         String sqlId = "SELECT id FROM Users WHERE username=?";
         Integer id = jdbcTemplate.queryForObject(sqlId, Integer.class, user.getUsername());
-        String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sqlInfo, id, user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), java.sql.Date.valueOf(java.time.LocalDate.now()));
+        String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sqlInfo, id, user.getUsername(), user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), java.sql.Date.valueOf(java.time.LocalDate.now()));
+    }
+
+    public User getUser(String username){
+        String sql = "SELECT nome, cognome, data_nascita, authority FROM Users_info u, Authorities a WHERE u.username = a.username AND u.username=?";
+        return jdbcTemplate.queryForObject(sql, new ProfiloRowMapper(), username);
     }
 
 }

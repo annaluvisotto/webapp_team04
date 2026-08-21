@@ -1,7 +1,6 @@
 package it.unitn.disi.webapp_team04.controllers;
 
-import it.unitn.disi.webapp_team04.pojos.User;
-import it.unitn.disi.webapp_team04.repositories.CheckUser;
+import it.unitn.disi.webapp_team04.services.CheckUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,24 +39,13 @@ public class MainController {
                           @RequestParam String password,
                           @RequestParam String ruolo,
                           Model model){
-        if(checkUser.checkUsername(username)){
-            //uso il model per passare l'errore alla view
+        if(!checkUser.adduser(nome, cognome, data, email, username, password, ruolo)){
             model.addAttribute("errore", "#team_04: This username is already taken, provide another one");
             return "public/signup";
         }
         else{
-            User user = new User();
-            user.setNome(nome);
-            user.setCognome(cognome);
-            user.setData_nascita(data);
-            user.setEmail(email);
-            user.setUsername(username);
-            user.setPassword(password);
-            user.setRuolo(ruolo);
-            checkUser.addUser(user);
             return "public/reg_confirmation";
         }
-
     }
 
     @GetMapping("/mylogin")

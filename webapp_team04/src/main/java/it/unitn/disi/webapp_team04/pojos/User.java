@@ -1,5 +1,8 @@
 package it.unitn.disi.webapp_team04.pojos;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 //pojo per inserire un utente nel db a seguito della registrazione
 public class User {
 
@@ -84,5 +87,26 @@ public class User {
     }
     public Integer getId() {
         return id;
+    }
+
+    public String getRuoloDisplay(){
+        switch (this.ruolo) {
+            case "ROLE_ADMIN":
+                return "ADMIN";
+            case "ROLE_USER_PROVA":
+                return "PROVA";
+            case "ROLE_USER_BASIC":
+                return "BASIC";
+            case "ROLE_USER_PRO":
+                return "PRO";
+            default:
+                return this.ruolo;
+        }
+    }
+
+    public String getDataDisplay() {
+        LocalDate data = LocalDate.parse(this.data_nascita);
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(f);
     }
 }

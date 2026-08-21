@@ -7,12 +7,13 @@ VALUES ('admin', '$2a$10$ClMmt/SOdXDgf9hmfil5NeAEf3OSOQS5Asqb0PpG6iC.Flx7ZAkqC',
 INSERT INTO Authorities (username, authority)
 VALUES ('admin', 'ROLE_ADMIN');
 
-INSERT INTO Users_info (ID, nome, cognome, data_nascita, email, data_reg)
+INSERT INTO Users_info (ID, username, nome, cognome, data_nascita, email, data_reg)
 VALUES (
            (SELECT ID FROM Users WHERE username = 'admin'),
+            'admin',
            'Admin',
            'Admin',
-           '2001-01-01',
+           '2005-03-21',
            'admin@email.com',
            CURRENT_DATE
        );
@@ -25,9 +26,10 @@ VALUES ('prova', '$2a$10$1hq0AqMSxin/bu5ZvlRdB.uaQeP8n6ZbyeYMut2l1JuprmF1KCFFm',
 INSERT INTO Authorities (username, authority)
 VALUES ('prova', 'ROLE_USER_PROVA');
 
-INSERT INTO Users_info (ID, nome, cognome, data_nascita, email, data_reg)
+INSERT INTO Users_info (ID, username, nome, cognome, data_nascita, email, data_reg)
 VALUES (
            (SELECT ID FROM Users WHERE username = 'prova'),
+            'prova',
            'Anna',
            'Luvisotto',
            '2005-03-21',
@@ -43,9 +45,10 @@ VALUES ('basic', '$2a$10$Z4IcIosP3UeeRKG3Wey.7.kxczlOGpX1szfl.0D5MI.cRQwLHGq1O',
 INSERT INTO Authorities (username, authority)
 VALUES ('basic', 'ROLE_USER_BASIC');
 
-INSERT INTO Users_info (ID, nome, cognome, data_nascita, email, data_reg)
+INSERT INTO Users_info (ID, username, nome, cognome, data_nascita, email, data_reg)
 VALUES (
            (SELECT ID FROM Users WHERE username = 'basic'),
+            'basic',
            'Sofia',
            'Cestari',
            '2005-11-22',
@@ -61,9 +64,10 @@ VALUES ('pro', '$2a$10$yFzT17ghKYrbl0LFg.VmLuWNMC6y/m5mMzOmmWw0AtBhVZ5lBgvTC', t
 INSERT INTO Authorities (username, authority)
 VALUES ('pro', 'ROLE_USER_PRO');
 
-INSERT INTO Users_info (ID, nome, cognome, data_nascita, email, data_reg)
+INSERT INTO Users_info (ID, username, nome, cognome, data_nascita, email, data_reg)
 VALUES (
            (SELECT ID FROM Users WHERE username = 'pro'),
+            'pro',
            'Laura',
            'Prandina',
            '2005-06-23',
