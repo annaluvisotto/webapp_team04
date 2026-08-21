@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!--Navbar User Prova-->
+<nav th:fragment="navbarProva" class="navbar navbar-light fixed-top winx-topbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Winx Fitness Club</a>
+
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarProva"
+                aria-controls="offcanvasNavbarProva">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end winx-floating-menu" tabindex="-1" id="offcanvasNavbarProva"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Chiudi"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:classappend="${activePage == 'dashboard_prova' ? 'active' : ''}" th:href="@{/dashboard_prova}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'profilo' ? 'active' : ''}" th:href="@{/profilo}">Visualizza profilo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'cambio_pw' ? 'active' : ''}" th:href="@{/cambio_pw}">Cambio Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'allenamento' ? 'active' : ''}" th:href="@{/allenamento}">Allenamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'upgrade' ? 'active' : ''}" th:href="@{/upgrade_prova}">Upgrade</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'recensione' ? 'active' : ''}" th:href="@{/recensione}">Inserisci recensione</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'logout' ? 'active' : ''}" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!--Navbar User Pro-->
+<nav th:fragment="navbarPro" class="navbar navbar-light fixed-top winx-topbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Winx Fitness Club</a>
+
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarPro"
+                aria-controls="offcanvasNavbarPro">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end winx-floating-menu" tabindex="-1" id="offcanvasNavbarPro"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Chiudi"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:classappend="${activePage == 'dashboard' ? 'active' : ''}" th:href="@{/dashboard_basic}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'profilo' ? 'active' : ''}" th:href="@{/profilo}">Visualizza profilo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'cambio_pw' ? 'active' : ''}" th:href="@{/cambio_pw}">Cambio Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'allenamento' ? 'active' : ''}" th:href="@{/allenamento}">Allenamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'inserisci_programma' ? 'active' : ''}" th:href="@{/inserisci_programma}">Inserisci programma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'statistiche_user' ? 'active' : ''}" th:href="@{/statistiche_user}">Visualizza statistiche</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'recensione' ? 'active' : ''}" th:href="@{/recensione}">Inserisci recensione</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'logout' ? 'active' : ''}" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!--Navbar User Basic-->
+<nav th:fragment="navbarBasic" class="navbar navbar-light fixed-top winx-topbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Winx Fitness Club</a>
+
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarBasic"
+                aria-controls="offcanvasNavbarBasic">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end winx-floating-menu" tabindex="-1" id="offcanvasNavbarBasic"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Chiudi"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:classappend="${activePage == 'dashboard' ? 'active' : ''}" th:href="@{/dashboard_basic}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'profilo' ? 'active' : ''}" th:href="@{/profilo}">Visualizza profilo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'cambio_pw' ? 'active' : ''}" th:href="@{/cambio_pw}">Cambio Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'allenamento' ? 'active' : ''}" th:href="@{/allenamento}">Allenamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'statistiche_user' ? 'active' : ''}" th:href="@{/statistiche_user}">Visualizza statistiche</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'upgrade' ? 'active' : ''}" th:href="@{/upgrade_basic}">Upgrade</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'recensione' ? 'active' : ''}" th:href="@{/recensione}">Inserisci recensione</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'logout' ? 'active' : ''}" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!--Navbar Admin-->
+<nav th:fragment="navbarAdmin" class="navbar navbar-light fixed-top winx-topbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Winx Fitness Club</a>
+
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarAdmin"
+                aria-controls="offcanvasNavbarAdmin">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="offcanvas offcanvas-end winx-floating-menu" tabindex="-1" id="offcanvasNavbarAdmin"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Chiudi"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:classappend="${activePage == 'dashboard' ? 'active' : ''}" th:href="@{/dashboard_admin}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'lista_utenti' ? 'active' : ''}" th:href="@{/lista_utenti}">Visualizza lista utenti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'rimuovi_utenti' ? 'active' : ''}" th:href="@{/rimuovi_utenti}">Rimuovi utenti scaduti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'statistiche_admin' ? 'active' : ''}" th:href="@{/statistiche_admin}">Statistiche</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:classappend="${activePage == 'logout' ? 'active' : ''}" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

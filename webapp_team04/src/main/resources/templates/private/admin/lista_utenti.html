@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body class="bg-light">
@@ -25,65 +26,29 @@
             </h3>
 
             <div class="card overflow-hidden shadow-sm" style="transform: none; border: 2px solid var(--winx-accent);">
-    <div class="table-responsive">
-        <table class="table align-middle mb-0 text-center">
-            <thead class="pink_elem">
-                <tr>
-                    <th scope="col" class="py-3">Username</th>
-                    <th scope="col" class="py-3">Nome</th>
-                    <th scope="col" class="py-3">Cognome</th>
-                    <th scope="col" class="py-3">Data di Nascita</th>
-                    <th scope="col" class="py-3">Ruolo</th>
-                    <th scope="col" class="py-3">Data Registrazione</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- serve inserire i dati collegando la pagina al db -->
-            </tbody>
-        </table>
-    </div>
-</div>
-    
-        </div>
-
-    </div>
-
-
-    <nav class="navbar navbar-light fixed-top winx-topbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Dashboard Admin</a>
-
-            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasNavbar"
-                    aria-controls="offcanvasNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="offcanvas offcanvas-end winx-floating-menu" tabindex="-1" id="offcanvasNavbar"
-                 aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Chiudi"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" th:href="@{/dashboard_admin}">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" th:href="@{/profilo}">Visualizza lista utenti</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/rimuovi_utenti}">Rimuovi utenti scaduti</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/statistiche_admin}">Statistiche</a>
-                        </li>
-                    </ul>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0 text-center">
+                        <thead class="pink_elem">
+                        <tr>
+                            <th scope="col" class="py-3">Username</th>
+                            <th scope="col" class="py-3">Nome</th>
+                            <th scope="col" class="py-3">Cognome</th>
+                            <th scope="col" class="py-3">Data di Nascita</th>
+                            <th scope="col" class="py-3">Ruolo</th>
+                            <th scope="col" class="py-3">Data Registrazione</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- serve inserire i dati collegando la pagina al db -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </div>
-    </nav>
+
+    </div>
+    <div th:replace="~{/fragments :: navbarAdmin}"></div>
 
 </div>
 

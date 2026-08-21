@@ -52,4 +52,10 @@ public class UserRepository {
         return jdbcTemplate.queryForObject(sql, new ProfiloRowMapper(), username);
     }
 
+    @Transactional
+    public void updateUser (String username, String nuovoRuolo){
+        String sql = "UPDATE Authorities SET authority=? WHERE username=?";
+        jdbcTemplate.update(sql, nuovoRuolo, username);
+    }
+
 }

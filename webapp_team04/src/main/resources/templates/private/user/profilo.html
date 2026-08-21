@@ -33,7 +33,7 @@
         <div class="row text-start mt-5">
           <div class="col-sm-6 mb-4">
             <h6 class="text-muted">Nome</h6>
-            <span th:text="${nome}"> </span>
+            <p th:text="${nome}"> </p>
           </div>
 
           <div class="col-sm-6 mb-4">
@@ -58,6 +58,19 @@
   </div>
 </div>
 </div>
+
+<!--cambia la navbar in base al ruolo-->
+<th:block th:if="${authority == 'ROLE_USER_PROVA'}">
+  <div th:replace="~{fragments :: navbarProva}"></div>
+</th:block>
+
+<th:block th:if="${authority == 'ROLE_USER_BASIC'}">
+  <div th:replace="~{fragments :: navbarBasic}"></div>
+</th:block>
+
+<th:block th:if="${authority == 'ROLE_USER_PRO'}">
+  <div th:replace="~{fragments :: navbarPro}"></div>
+</th:block>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>

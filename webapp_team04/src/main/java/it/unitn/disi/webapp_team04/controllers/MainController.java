@@ -76,30 +76,29 @@ public class MainController {
     @GetMapping("/dashboard_admin")
     public String dashboard_admin(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
+        model.addAttribute("activePage", "dashboard");
         return "private/admin/dashboard_admin";
     }
 
     @GetMapping("/dashboard_prova")
     public String dashboard_prova(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
+        model.addAttribute("activePage", "dashboard");
         return "private/user/dashboard_prova";
     }
 
     @GetMapping("/dashboard_basic")
     public String dashboard_basic(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
+        model.addAttribute("activePage", "dashboard");
         return "private/user/dashboard_basic";
     }
 
     @GetMapping("/dashboard_pro")
     public String dashboard_pro(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
+        model.addAttribute("activePage", "dashboard");
         return "private/user/dashboard_pro";
-    }
-
-    @GetMapping("/logout")
-    public String logout() {
-        return "public/logout_confirmation";
     }
 
     @GetMapping("/contatti")
