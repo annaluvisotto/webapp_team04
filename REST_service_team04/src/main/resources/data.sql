@@ -1,5 +1,5 @@
 INSERT INTO Default_Trainings (nome_allenamento) VALUES
-('Full Body'), ('Push/Pull/Legs'), ('Cardio'), ('Strenght');
+('Full Body'), ('Push/Pull/Legs'), ('Cardio'), ('Strength');
 
 INSERT INTO Exercises VALUES 
 ('Panca piana', 0.75), ('Squat', 1.20), ('Lat machine', 0.65), ('Crunch addominali', 0.20), 
@@ -24,9 +24,9 @@ WITH Composizione_Allenamenti (nome_allenamento, nome_es, serie, rip) AS ( VALUE
 ('Cardio', 'Salto della corda', 3, 15), ('Cardio', 'Ponte glutei', 3, 15), 
 ('Cardio', 'Jumping Jacks', 3, 15), ('Cardio', 'Burpees', 3, 15), 
 
-('Strenght', 'Squat', 4, 5), ('Strenght', 'Stacchi da terra', 3, 9), 
-('Strenght', 'Affondi', 4, 5), ('Strenght', 'Bicipiti ai cavi', 3, 9), 
-('Strenght', 'Lat machine', 4, 5), ('Strenght', 'Tricipiti ai cavi', 3, 9)
+('Strenght', 'Squat', 4, 5), ('Strength', 'Stacchi da terra', 3, 9),
+('Strenght', 'Affondi', 4, 5), ('Strength', 'Bicipiti ai cavi', 3, 9),
+('Strenght', 'Lat machine', 4, 5), ('Strength', 'Tricipiti ai cavi', 3, 9)
 )
 SELECT dt.ID_Training, ca.nome_es, ca.serie, ca.rip, (ca.serie * ca.rip * e.kcal)
 FROM Composizione_Allenamenti ca 

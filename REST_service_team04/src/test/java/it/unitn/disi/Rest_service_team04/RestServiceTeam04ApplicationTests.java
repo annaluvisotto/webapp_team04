@@ -1,4 +1,4 @@
-package it.unitn.disi.rest_service_team04;
+package it.unitn.disi.Rest_service_team04;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

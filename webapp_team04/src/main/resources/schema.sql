@@ -31,15 +31,15 @@ CREATE TABLE IF NOT EXISTS Users_info(
     FOREIGN KEY (ID) REFERENCES Users(ID) ON DELETE CASCADE
     );
 
-CREATE TABLE IF NOT EXISTS Default_Trainings(
+CREATE TABLE IF NOT EXISTS Default_Trainings_Exec(
     ID_User INT NOT NULL,
-    nome_allenamento varchar(32) NOT NULL,
+    ID_Training INT NOT NULL,
     esecuzioni INT,
     PRIMARY KEY (nome_allenamento, ID_User),
     FOREIGN KEY (ID_User) REFERENCES Users(ID)
     );
 
-CREATE TABLE IF NOT EXISTS Personalized_Trainings(
+CREATE TABLE IF NOT EXISTS Personalized_Trainings_Exec(
     ID_Training INT AUTO_INCREMENT NOT NULL,
     ID_User INT NOT NULL,
     nome_allenamento varchar(32) NOT NULL,

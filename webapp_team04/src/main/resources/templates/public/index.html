@@ -12,13 +12,13 @@
 <body>
 
 <div class="container mt-3 text-center"> 
-    <h1 class="mb-4">Winx fitness club <img src="../static/images/logo.png" alt="Logo del centro" height="100"> </h1>
+    <h1 class="mb-4">Winx fitness club <img th:src="@{/images/logo.png}" alt="Logo del centro" height="100"> </h1>
 </div>
 
 <div class="pink_elem">
     <div class="row align-items-center">
         <div class="col-md-3 text-end">
-            <img src="../static/images/bloom_gym.gif" alt="I nostri clienti">
+            <img th:src="@{/images/bloom_gym.gif}" alt="I nostri clienti">
         </div>
         <div class="col-md-7 text-start">
         <h3>La Filosofia del Winx fitness club</h3> 
@@ -29,8 +29,6 @@
     </div>
 </div>  
 
-
-<!-- tramite thymeleaf e controller serve gestire gli spostamenti alle altre pagine pubbliche -->
 <div class="d-flex justify-content-evenly mt-3">
     <div>
         <a th:href="@{/signup}" class="btn btn-primary">Registrati</a>
