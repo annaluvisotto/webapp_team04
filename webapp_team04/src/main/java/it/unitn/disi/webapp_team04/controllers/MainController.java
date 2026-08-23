@@ -40,7 +40,7 @@ public class MainController {
                           @RequestParam String ruolo,
                           Model model){
         if(!checkUser.addUser(nome, cognome, data, email, username, password, ruolo)){
-            model.addAttribute("errore", "#team_04: This username is already taken, provide another one");
+            model.addAttribute("errore", "#team_04: This username is already taken, please enter another one");
             return "public/signup";
         }
         else{

@@ -75,9 +75,16 @@ public class UserDashboardController {
 
     @PostMapping("/gestione_cambiopw")
     public String gestione_cambiopw(@RequestParam String oldPassword, @RequestParam String newPassword, Authentication authentication, Model model){
-        checkUser.updatePassword(authentication.getName(), oldPassword, newPassword);
-        model.addAttribute("activePage", "cambio_pw");
-        model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority());
-        return "private/user/cambiopw_confirmation";
+        if(!checkUser.updatePassword(authentication.getName(), oldPassword, newPassword)){
+            model.addAttribute("errore", "#team_04: The old password is incorrect");
+            model.addAttribute("activePage", "cambio_pw");
+            model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority());
+            return "private/user/cambio_pw";
+        }
+        else{
+            model.addAttribute("activePage", "cambio_pw");
+            model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority());
+            return "private/user/cambiopw_confirmation";
+        }
     }
 }

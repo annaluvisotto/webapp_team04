@@ -20,6 +20,8 @@
 
             <h3 class="card-title text-center mb-4 fw-bold">Cambia la tua password</h3>
 
+            <p th:if="${errore}" th:text="${errore}" class="text-danger mt-2"></p>
+
             <form th:action="@{/gestione_cambiopw}" method="POST">
 
                 <div class="mb-4">
