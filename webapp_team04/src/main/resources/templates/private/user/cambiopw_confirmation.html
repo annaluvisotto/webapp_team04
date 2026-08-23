@@ -2,7 +2,7 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Winx Fitness Club</title>
+    <title>Winx fitness club</title>
     <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,32 +12,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body class="bg-light">
 
-<div class="app-layout">
-
-    <div class="container d-flex flex-column justify-content-center align-items-center"
-         style="min-height: 60vh; margin-top: 80px;">
-
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-3" style="color: var(--winx-text-dark);">
-                Benvenuto/a, <span th:text="${nome}"></span> !
-            </h1>
-
-            <h3 class="h5 fw-bold mb-4" style="color: var(--winx-text-main);">
-                Hai usufruito di <span class="winx-badge-counter" th:text="${esecuzioni}"></span>/3 allenamenti gratuiti
-            </h3>
-
-            <p class="lead text-muted">
-                Seleziona un'opzione dal menu a destra per iniziare
-            </p>
-        </div>
-
-    </div>
-
-    <div th:replace="~{/fragments :: navbarProva}"></div>
-
+<body>
+<div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+    <h3 class="mb-3">Cambio password avvenuto con successo!</h3>
+    <h6 class="text-muted mb-4">Seleziona un'opzione dal menù a destra per navigare</h6>
 </div>
+
+<!--cambia la navbar in base al ruolo-->
+<th:block th:if="${authority == 'ROLE_USER_PROVA'}">
+    <div th:replace="~{fragments :: navbarProva}"></div>
+</th:block>
+
+<th:block th:if="${authority == 'ROLE_USER_BASIC'}">
+    <div th:replace="~{fragments :: navbarBasic}"></div>
+</th:block>
+
+<th:block th:if="${authority == 'ROLE_USER_PRO'}">
+    <div th:replace="~{fragments :: navbarPro}"></div>
+</th:block>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,5 +1,6 @@
 package it.unitn.disi.webapp_team04.controllers;
 
+import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
 import it.unitn.disi.webapp_team04.services.CheckUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     private final CheckUser checkUser;
+    private final TrainingRepository trainingRepository;
 
     @Autowired
-    private MainController(CheckUser checkUser) {
+    private MainController(CheckUser checkUser, TrainingRepository trainingRepository) {
         this.checkUser = checkUser;
+        this.trainingRepository = trainingRepository;
     }
 
     @GetMapping("/index")
@@ -84,6 +87,7 @@ public class MainController {
     public String dashboard_prova(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "dashboard");
+        model.addAttribute("esecuzioni", trainingRepository.getExec(authentication.getName()));
         return "private/user/dashboard_prova";
     }
 
