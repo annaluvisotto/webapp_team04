@@ -58,4 +58,16 @@ public class UserRepository {
         jdbcTemplate.update(sql, nuovoRuolo, username);
     }
 
+    @Transactional
+    public String getPassword(String username){
+        String sql = "SELECT password FROM Users WHERE username=?";
+        return jdbcTemplate.queryForObject(sql, String.class, username);
+    }
+
+    @Transactional
+    public void updatePassword(String username, String password){
+        String sql = "UPDATE Users SET password=? WHERE username=?";
+        jdbcTemplate.update(sql, password, username);
+    }
+
 }
