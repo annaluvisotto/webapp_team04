@@ -34,12 +34,6 @@ public class UserDashboardController {
         return "private/user/profilo";
     }
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        model.addAttribute("activePage", "logout");
-        return "public/logout_confirmation";
-    }
-
     @GetMapping("/upgrade_prova")
     public String upgrade_prova(Model model){
         model.addAttribute("activePage", "upgrade");

@@ -80,27 +80,6 @@ public class MainController {
         return "private/admin/dashboard_admin";
     }
 
-    @GetMapping("/lista_utenti")
-    public String lista_utenti(Authentication authentication, Model model) {
-        model.addAttribute("nome", authentication.getName());
-        model.addAttribute("activePage", "dashboard");
-        return "private/admin/lista_utenti";
-    }
-
-    @GetMapping("/rimuovi_utenti")
-    public String rimuovi_utenti(Authentication authentication, Model model) {
-        model.addAttribute("nome", authentication.getName());
-        model.addAttribute("activePage", "dashboard");
-        return "private/admin/rimuovi_utenti";
-    }
-
-    @GetMapping("/statistiche_admin")
-    public String statistiche_admin(Authentication authentication, Model model) {
-        model.addAttribute("nome", authentication.getName());
-        model.addAttribute("activePage", "dashboard");
-        return "private/admin/statistiche_admin";
-    }
-
     @GetMapping("/dashboard_prova")
     public String dashboard_prova(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
@@ -125,6 +104,12 @@ public class MainController {
     @GetMapping("/contatti")
     public String contatti() {
         return "public/contatti";
+    }
+
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        model.addAttribute("activePage", "logout");
+        return "public/logout_confirmation";
     }
 
 }
