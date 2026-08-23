@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -50,6 +51,32 @@ public class UserRepository {
     public User getUser(String username){
         String sql = "SELECT nome, cognome, data_nascita, authority FROM Users_info u, Authorities a WHERE u.username = a.username AND u.username=?";
         return jdbcTemplate.queryForObject(sql, new ProfiloRowMapper(), username);
+    }
+
+    public List<User> getAllUsers(){
+        String sql = "SELECT u.id, u.username, u.nome, u.cognome, u.data_nascita, a.authority, u.email, u.data_reg FROM Users_info u LEFT JOIN Authorities a ON u.username = a.username WHERE a.authority != 'ROLE_ADMIN' ORDER BY a.authority DESC, u.data_reg ASC";
+        return jdbcTemplate.query(sql, (res, dim) -> {
+                User user = new User();
+                user.setId(res.getInt("id"));
+                user.setUsername(res.getString("username"));
+                user.setNome(res.getString("nome"));
+                user.setCognome(res.getString("cognome"));
+                user.setEmail(res.getString("email"));
+                if (res.getString("data_nascita") != null){
+                    user.setData_nascita(res.getString("data_nascita"));}
+                else {
+                    user.setData_nascita("");}
+                if (res.getString("authority") != null){
+                    user.setRuolo(res.getString("authority"));}
+                else {
+                    user.setRuolo("");}
+                if (res.getString("data_reg") != null){
+                    user.setData_reg(res.getString("data_reg"));}
+                else {
+                    user.setData_reg("");}
+                return user;
+                }
+        );
     }
 
     @Transactional

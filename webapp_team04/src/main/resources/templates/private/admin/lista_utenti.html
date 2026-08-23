@@ -39,7 +39,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- serve inserire i dati collegando la pagina al db -->
+                            <tr th:each="user : ${utenti}">
+                                <td th:text="${user.username}">username</td>
+                                <td th:text="${user.nome}">nome</td>
+                                <td th:text="${user.cognome}">cognome</td>
+                                <td th:text="${user.data_nascita}">data di nascita</td>
+                                <td th:text="${user.ruolo}">ruolo</td>
+                                <td th:text="${user.data_reg}">data di registrazione</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

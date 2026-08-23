@@ -3,6 +3,7 @@ package it.unitn.disi.webapp_team04.services;
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 
 @Service
 public class CheckUser {
@@ -16,7 +17,8 @@ public class CheckUser {
         if (userRepository.checkUsername(username)) {
             return false;
         } else {
-            User user = new User(nome, ruolo, password, username, email, data_nascita, cognome);
+            String data_reg = LocalDate.now().toString();
+            User user = new User(nome, ruolo, password, username, email, data_nascita, cognome, data_reg);
             userRepository.addUser(user);
             return true;
         }

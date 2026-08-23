@@ -22,7 +22,7 @@ VALUES (
            'Admin',
            '2005-03-21',
            'admin@email.com',
-           CURRENT_DATE
+           '2026-08-01'
        ),
        (
            (SELECT ID FROM Users WHERE username = 'prova'),
@@ -31,7 +31,7 @@ VALUES (
            'Luvisotto',
            '2005-03-21',
            'anna@email.com',
-           CURRENT_DATE
+           '2026-08-02'
        ),
        (
            (SELECT ID FROM Users WHERE username = 'basic'),
@@ -40,7 +40,7 @@ VALUES (
            'Cestari',
            '2005-11-22',
            'sofia@email.com',
-           CURRENT_DATE
+           '2026-08-03'
        ),
        (
            (SELECT ID FROM Users WHERE username = 'pro'),
@@ -49,7 +49,7 @@ VALUES (
            'Prandina',
            '2005-06-23',
            'laura@email.com',
-           CURRENT_DATE
+           '2026-08-04'
        );
 
 INSERT INTO Default_Trainings_Exec (ID_User, ID_Training, esecuzioni)

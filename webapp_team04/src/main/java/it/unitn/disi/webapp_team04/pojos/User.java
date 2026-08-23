@@ -14,8 +14,9 @@ public class User {
     private String username;
     private String password;
     private String ruolo;
+    private String data_reg;
 
-    public User(String nome, String ruolo, String password, String username, String email, String data_nascita, String cognome) {
+    public User(String nome, String ruolo, String password, String username, String email, String data_nascita, String cognome, String data_reg) {
         this.id = 0;
         this.nome = nome;
         this.ruolo = ruolo;
@@ -24,6 +25,7 @@ public class User {
         this.email = email;
         this.data_nascita = data_nascita;
         this.cognome = cognome;
+        this.data_reg = data_reg;
     }
 
     public User() {
@@ -35,6 +37,7 @@ public class User {
         this.email = "";
         this.data_nascita = "";
         this.cognome = "";
+        this.data_reg = "";
     }
 
     //setter
@@ -62,6 +65,7 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
+    public void setData_reg(String data_reg){this.data_reg = data_reg;}
 
     //getter
     public String getEmail() {
@@ -88,6 +92,7 @@ public class User {
     public Integer getId() {
         return id;
     }
+    public String getData_reg(){return data_reg;}
 
     public String getRuoloDisplay(){
         switch (this.ruolo) {
@@ -106,6 +111,12 @@ public class User {
 
     public String getDataDisplay() {
         LocalDate data = LocalDate.parse(this.data_nascita);
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(f);
+    }
+
+    public String getData2Display() {
+        LocalDate data = LocalDate.parse(this.data_reg);
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return data.format(f);
     }

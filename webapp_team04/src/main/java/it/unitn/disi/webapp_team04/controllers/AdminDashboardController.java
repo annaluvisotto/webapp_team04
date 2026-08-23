@@ -19,6 +19,7 @@ public class AdminDashboardController {
     public String lista_utenti(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "dashboard");
+        model.addAttribute("utenti", userRepository.getAllUsers());
         return "private/admin/lista_utenti";
     }
 
