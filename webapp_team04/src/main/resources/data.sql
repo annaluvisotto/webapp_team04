@@ -68,15 +68,15 @@ VALUES ((SELECT ID FROM Users WHERE username = 'pro'), 'Upper', 6),
        ((SELECT ID FROM Users WHERE username = 'pro'), 'Lower', 6);
 
 INSERT INTO Personalized_Trainings_Info (ID_Training, ID_User, nome_esercizio, numero_serie, numero_ripetizioni)
-VALUES ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Panca piana', 4, 6),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Lat machine', 4, 7),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Bicipiti ai cavi', 4, 6),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Tricipiti ai cavi', 4, 7),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Rematore', 4, 6),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Alzate laterali', 4, 9),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Squat', 3, 12),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Affondi', 3, 17),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Ponte glutei', 3, 22),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg curl', 3, 10),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg extension', 4, 9),
-       ((SELECT ID FROM Default_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Calf machine', 4, 9);
+VALUES ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Panca piana', 4, 6),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Lat machine', 4, 7),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Bicipiti ai cavi', 4, 6),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Tricipiti ai cavi', 4, 7),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Rematore', 4, 6),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Upper'), (SELECT ID FROM Users WHERE username = 'pro'), 'Alzate laterali', 4, 9),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Squat', 3, 12),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Affondi', 3, 17),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Ponte glutei', 3, 22),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg curl', 3, 10),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg extension', 4, 9),
+       ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Calf machine', 4, 9);

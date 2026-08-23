@@ -34,8 +34,8 @@ public class SecurityConfig{
         //autenticazione
         http.formLogin(c ->
                 c.loginPage("/login")
-                        .defaultSuccessUrl("/dashboard")
-                        .failureForwardUrl("/login_failure")
+                .defaultSuccessUrl("/dashboard")
+                .failureForwardUrl("/login_failure")
         );
 
         //autorizzazione --> da modificare man mano, questo è l'esempio della prof
@@ -45,7 +45,9 @@ public class SecurityConfig{
                         .requestMatchers("/compute").hasRole("USER")
                         .requestMatchers("/datetime").hasRole("USER")
                         .requestMatchers("/externalDateTime").hasRole( "USER")
-                        .requestMatchers("/adminDashboard").hasRole("ADMIN")
+                        .requestMatchers("/dashboard_admin", "/lista_utenti", "/rimuovi_utenti", "/statistiche_admin").hasRole("ADMIN").requestMatchers("/dashboard_prova").hasRole("USER_PROVA")
+                        .requestMatchers("/dashboard_basic").hasRole("USER_BASIC")
+                        .requestMatchers("/dashboard_pro").hasRole("USER_PRO")
                         .requestMatchers("/getUsers").hasRole("ADMIN")
                         .requestMatchers("/getSequence").hasRole("USER")
                         .anyRequest().permitAll()
