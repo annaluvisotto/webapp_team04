@@ -50,24 +50,25 @@ public class AdminDashboardController {
         List<String> nomi = new ArrayList<>();
         List<Integer> basic_stats = new ArrayList<>();
         List<Integer> pro_stats = new ArrayList<>();
-        for (List<TrainingStats> coppia : adminStats){
-            TrainingStats basicStat = coppia.get(0);
-            TrainingStats proStat = coppia.get(1);
-            int idCercato = basicStat.getId();
 
-            String nomeTrovato = "Allenamento: " + idCercato;
+        if (trainings != null) {
             for (TrainingStats training : trainings) {
-                if (training.getId() == idCercato) {
-                    nomeTrovato = training.getNome();
-                    break;
+                int idAllenamento = training.getId();
+                String nomeAllenamento = training.getNome();
+                int mediaBasic = 0;
+                int mediaPro = 0;
+                for (List<TrainingStats> coppia : adminStats) {
+                    if (coppia.get(0).getId() == idAllenamento) {
+                        mediaBasic = coppia.get(0).getExec();
+                        mediaPro = coppia.get(1).getExec();
+                        break;
+                    }
                 }
-            }
 
-            basicStat.setNome(nomeTrovato);
-            proStat.setNome(nomeTrovato);
-            nomi.add(nomeTrovato);
-            basic_stats.add(basicStat.getExec());
-            pro_stats.add(proStat.getExec());
+                nomi.add(nomeAllenamento);
+                basic_stats.add(mediaBasic);
+                pro_stats.add(mediaPro);
+            }
         }
 
         model.addAttribute("nomi", nomi);

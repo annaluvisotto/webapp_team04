@@ -12,7 +12,7 @@ public class TrainingRest {
     private final RestTemplate restTemplate = new RestTemplate();
 
     // Inserisci l'URL esatto del tuo endpoint REST
-    private final String baseUrl = "http://localhost:8081/Default-trainings";
+    private final String baseUrl = "http://localhost:8081/Default-programs";
 
     public List<TrainingStats> getAllTrainings() {
         try {
@@ -24,6 +24,8 @@ public class TrainingRest {
                 return List.of();
             }
         } catch (Exception e) {
+            System.err.println("ERRORE CHIAMATA REST: " + e.getMessage());
+            e.printStackTrace();
             return List.of();
         }
     }

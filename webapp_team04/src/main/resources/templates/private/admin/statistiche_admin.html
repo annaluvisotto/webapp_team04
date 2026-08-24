@@ -32,13 +32,13 @@
         </div>
 
         <script th:inline="javascript">
+            const nomi = /*[[${nomi}]]*/ [];
+            const datiBasic = /*[[${datiBasic}]]*/ [];
+            const datiPro = /*[[${datiPro}]]*/ [];
             console.log("Labels ricevuti:", nomi);
             console.log("Dati Basic:", datiBasic);
             console.log("Dati Pro:", datiPro);
 
-            const nomi = [];
-            const datiBasic = [];
-            const datiPro = [];
             const rootStyles = getComputedStyle(document.documentElement);
             const coloreBasic = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
             const colorePro = rootStyles.getPropertyValue('--winx-pastel-blue').trim();
