@@ -59,4 +59,37 @@ public class TrainingRepository {
             return List.of(statBasic, statPro);
         });
     }
+
+    public List<TrainingStats> getDefaultTrainingsStats(String username) {
+        String sql = """
+            SELECT dte.ID_Training, dte.esecuzioni
+            FROM Default_Trainings_Exec dte
+            JOIN Users u ON dte.ID_User = u.ID
+            WHERE u.username = ?
+            ORDER BY dte.ID_Training ASC
+            """;
+
+        return jdbcTemplate.query(sql, (res, dim) -> {
+            int id = res.getInt("ID_Training");
+            int exec = res.getInt("esecuzioni");
+            return new TrainingStats(id, "", exec);
+        }, username);
+    }
+
+    public List<TrainingStats> getPersonalizedTrainingsStats(String username) {
+        String sql = """
+            SELECT pte.ID_Training, pte.nome_allenamento, pte.esecuzioni
+            FROM Personalized_Trainings_Exec pte
+            JOIN Users u ON pte.ID_User = u.ID
+            WHERE u.username = ?
+            ORDER BY pte.ID_Training ASC
+            """;
+
+        return jdbcTemplate.query(sql, (res, dim) -> {
+            int id = res.getInt("ID_Training");
+            String nome = res.getString("nome_allenamento");
+            int exec = res.getInt("esecuzioni");
+            return new TrainingStats(id, nome, exec);
+        }, username);
+    }
 }

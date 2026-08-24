@@ -35,10 +35,6 @@
             const nomi = /*[[${nomi}]]*/ [];
             const datiBasic = /*[[${datiBasic}]]*/ [];
             const datiPro = /*[[${datiPro}]]*/ [];
-            console.log("Labels ricevuti:", nomi);
-            console.log("Dati Basic:", datiBasic);
-            console.log("Dati Pro:", datiPro);
-
             const rootStyles = getComputedStyle(document.documentElement);
             const coloreBasic = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
             const colorePro = rootStyles.getPropertyValue('--winx-pastel-blue').trim();
@@ -88,9 +84,10 @@
 
         <div th:replace="~{/fragments :: navbarAdmin}"></div>
 
+        </div>
     </div>
-</div>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

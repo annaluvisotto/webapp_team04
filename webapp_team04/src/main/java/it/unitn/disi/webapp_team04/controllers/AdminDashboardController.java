@@ -27,6 +27,9 @@ public class AdminDashboardController {
 
     @GetMapping("/lista_utenti")
     public String lista_utenti(Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "lista_utenti");
         model.addAttribute("utenti", userRepository.getAllUsers());
@@ -35,6 +38,9 @@ public class AdminDashboardController {
 
     @GetMapping("/rimuovi_utenti")
     public String rimuovi_utenti(Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "rimuovi_utenti");
         return "private/admin/rimuovi_utenti";
@@ -42,6 +48,9 @@ public class AdminDashboardController {
 
     @GetMapping("/statistiche_admin")
     public String statistiche_admin(Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "statistiche_admin");
         List<List<TrainingStats>> adminStats = trainingRepository.gatAdminStats();
