@@ -36,13 +36,13 @@ public class MainController {
     //crea un oggetto User riempiendo i campi con i valori inseriti dall'utente
     public String adduser(@RequestParam String nome,
                           @RequestParam String cognome,
-                          @RequestParam String data_nascita,
+                          @RequestParam String data,
                           @RequestParam String email,
                           @RequestParam String username,
                           @RequestParam String password,
                           @RequestParam String ruolo,
                           Model model){
-        if(!checkUser.addUser(nome, cognome, data_nascita, email, username, password, ruolo)){
+        if(!checkUser.addUser(nome, cognome, data, email, username, password, ruolo)){
             model.addAttribute("errore", "#team_04: This username is already taken, provide another one");
             return "public/signup";
         }

@@ -114,7 +114,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Modelli di Selezione (Radio Button) */
 .piano-radio {
-    display: none;
+    opacity: 0;         /* Lo rende trasparente */
+    position: absolute; /* Lo toglie dall'ingombro della pagina */
+    z-index: -1;        /* Lo spinge dietro la card */
 }
 
 .piano-card {
@@ -267,4 +269,61 @@ hr.winx-divider {
 
     /* Congela il calcolo vettoriale dell'ombra, mantenendolo identico allo stato di riposo */
     box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+}
+
+/* Stile del Box Messaggi */
+#message {
+    display: none;
+    background-color: var(--winx-card);
+    border: 2px solid var(--winx-accent);
+    border-radius: 8px;
+    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
+    color: var(--winx-text-dark);
+
+    /* Nessun posizionamento assoluto: ora spinge i contenuti in basso */
+    width: 100%;
+    padding: 20px; /* Padding leggermente aumentato per far respirare il box */
+    margin-top: 8px;
+    margin-bottom: 15px; /* Spazio extra prima del campo "Ripeti password" */
+}
+
+#message h6 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--winx-text-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+#message p {
+    padding: 5px 0 5px 35px;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* Regole dinamiche gestite da JS */
+.valid {
+    color: #7b9e76; /* Verde salvia */
+    transition: color 0.3s ease;
+}
+
+.valid:before {
+    position: relative;
+    left: -25px;
+    content: "✔";
+    font-weight: bold;
+}
+
+.invalid {
+    color: #e07a7a; /* Rosso pastello */
+    transition: color 0.3s ease;
+}
+
+.invalid:before {
+    position: relative;
+    left: -25px;
+    content: "✖";
+    font-weight: bold;
 }
