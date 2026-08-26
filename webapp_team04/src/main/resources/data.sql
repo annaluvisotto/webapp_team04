@@ -6,13 +6,15 @@ INSERT INTO Users (username, password, enabled)
 VALUES ('admin', '$2a$10$ClMmt/SOdXDgf9hmfil5NeAEf3OSOQS5Asqb0PpG6iC.Flx7ZAkqC', true),
         ('prova', '$2a$10$1hq0AqMSxin/bu5ZvlRdB.uaQeP8n6ZbyeYMut2l1JuprmF1KCFFm', true),
         ('basic', '$2a$10$Z4IcIosP3UeeRKG3Wey.7.kxczlOGpX1szfl.0D5MI.cRQwLHGq1O', true),
-        ('pro', '$2a$10$yFzT17ghKYrbl0LFg.VmLuWNMC6y/m5mMzOmmWw0AtBhVZ5lBgvTC', true);
+        ('pro', '$2a$10$yFzT17ghKYrbl0LFg.VmLuWNMC6y/m5mMzOmmWw0AtBhVZ5lBgvTC', true),
+        ('disabilitato', '$2a$10$La9dtTAuzqBouKe5lzxhSu5j0xUTZQOv67YocZ2X0RYXJZ27Dpx3e', false);
 
 INSERT INTO Authorities (username, authority)
 VALUES ('admin', 'ROLE_ADMIN'),
        ('prova', 'ROLE_USER_PROVA'),
        ('basic', 'ROLE_USER_BASIC'),
-       ('pro', 'ROLE_USER_PRO');
+       ('pro', 'ROLE_USER_PRO'),
+       ('disabilitato', 'ROLE_USER_PROVA');
 
 INSERT INTO Users_info (ID, username, nome, cognome, data_nascita, email, data_reg)
 VALUES (
@@ -50,6 +52,15 @@ VALUES (
            '2005-06-23',
            'laura@email.com',
            '2026-08-04'
+       ),
+       (
+           (SELECT ID FROM Users WHERE username = 'disabilitato'),
+            'disabilitato',
+            'Mario',
+            'Rossi',
+            '2009-03-28',
+            'mario@email.com',
+            '2026-08-05'
        );
 
 INSERT INTO Default_Trainings_Exec (ID_User, ID_Training, esecuzioni)

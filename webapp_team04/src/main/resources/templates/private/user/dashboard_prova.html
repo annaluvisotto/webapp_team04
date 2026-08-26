@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body class="bg-light">
@@ -28,9 +29,37 @@
                 Hai usufruito di <span class="winx-badge-counter" th:text="${esecuzioni}"></span>/3 allenamenti gratuiti
             </h3>
 
-            <p class="lead text-muted">
-                Seleziona un'opzione dal menu a destra per iniziare
-            </p>
+            <div class="card mt-5 w-100"
+                 style="max-width: 600px; border-radius: 15px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <div class="card-body p-4 text-start">
+
+                    <h4 class="fw-bold mb-4 text-center" style="color: var(--winx-text-dark);">
+                        Lasciaci un commento!
+                    </h4>
+
+                    <form id="formRecensione">
+
+                        <div class="mb-3">
+                            <label for="titoloRecensione" class="form-label fw-semibold">Titolo:</label>
+                            <input type="text" class="form-control" id="titoloRecensione" name="titolo"
+                                   placeholder="Dai un titolo al tuo commento..." required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="testoRecensione" class="form-label fw-semibold">Testo:</label>
+                            <textarea class="form-control" id="testoRecensione" name="testo" rows="4"
+                                      placeholder="Raccontaci la tua esperienza..." required></textarea>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary px-5 py-2">Inserisci recensione</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
         </div>
 
     </div>
