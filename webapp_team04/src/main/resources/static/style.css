@@ -32,6 +32,7 @@ body {
     font-family: 'Raleway', sans-serif;
     min-height: 100vh;
     margin: 0;
+    /*padding-bottom: 100px;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,13 +49,15 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px;
     box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
     color: var(--winx-text-dark);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /*transition: transform 0.2s ease, box-shadow 0.2s ease;*/
 }
 
+/*
 .card:hover {
     transform: translate(-4px, -4px);
     box-shadow: 10px 10px 0px rgba(176, 224, 230, 0.6);
 }
+*/
 
 .card-header {
     background-color: transparent;

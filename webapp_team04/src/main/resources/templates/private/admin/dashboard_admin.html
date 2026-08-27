@@ -23,15 +23,14 @@
             <h1 class="display-4 fw-bold mb-3" style="color: var(--winx-text-dark);">
                 Benvenuto/a, <span th:text="${nome}"></span> !
             </h1>
-
-            <p class="lead text-muted">
-                Seleziona un'opzione dal menu a destra per iniziare
-            </p>
         </div>
 
     </div>
 
     <div th:replace="~{/fragments :: navbarAdmin}"></div>
+    <div class="mt-auto w-100">
+        <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+    </div>
 
 </div>
 
