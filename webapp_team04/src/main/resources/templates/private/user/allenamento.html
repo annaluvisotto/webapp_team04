@@ -61,7 +61,7 @@
                                 </span>
 
                                 <div class="d-flex justify-content-end pt-2 border-top">
-                                    <form th:action="@{/training/completed}" method="post" class="training-sub">
+                                    <form th:action="@{/Dtraining/completed}" method="post" class="training-sub">
                                         <input type="hidden" name="id" th:value="${prog.id}">
                                         <input type="hidden" name="tipo" value="DEFAULT">
                                         <button type="submit" class="btn btn-success px-3">
@@ -110,7 +110,7 @@
                                 </span>
 
                                 <div class="d-flex justify-content-end pt-2 border-top">
-                                    <form th:action="@{/training/completed}" method="post" class="training-sub">
+                                    <form th:action="@{/Ptraining/completed}" method="post" class="training-sub">
                                         <input type="hidden" name="id" th:value="${prog.id}">
                                         <input type="hidden" name="tipo" value="PERSONALIZED">
                                         <button type="submit" class="btn btn-success px-3">
@@ -134,7 +134,7 @@
 
     document.querySelectorAll('.training-sub').forEach(form => {
         form.addEventListener('submit', function(event) {
-            if (userRole === 'ROLE_USER_PROVA' && execPrec === 2) {
+            if (userRole === 'ROLE_USER_PROVA' && execPrec >= 2) {
                 alert("Hai completato 3/3 allenamenti. Questo account non è più valido");
             }
         });

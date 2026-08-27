@@ -1,5 +1,7 @@
 package it.unitn.disi.webapp_team04.repositories;
 
+import it.unitn.disi.webapp_team04.pojos.Exercise;
+import it.unitn.disi.webapp_team04.pojos.Training;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import it.unitn.disi.webapp_team04.pojos.TrainingStats;
@@ -91,5 +93,71 @@ public class TrainingRepository {
             int exec = res.getInt("esecuzioni");
             return new TrainingStats(id, nome, exec);
         }, username);
+    }
+
+    public List<Training> getPersonalizedTrainings(String username) {
+        String sqlTrainings = """
+            SELECT pte.ID_Training, pte.nome_allenamento
+            FROM Personalized_Trainings_Exec pte
+            JOIN Users u ON pte.ID_User = u.ID
+            WHERE u.username = ?
+            ORDER BY pte.ID_Training ASC
+            """;
+
+        return jdbcTemplate.query(sqlTrainings, (res, dim) -> {
+            int id = res.getInt("ID_Training");
+            String nome = res.getString("nome_allenamento");
+            int kcal = 0;
+
+            String sqlExercises = """
+                SELECT nome_esercizio, serie, ripetizioni
+                FROM Personalized_Exercises_Info
+                WHERE ID_Training = ?
+                """;
+
+            List<Exercise> esercizi = jdbcTemplate.query(sqlExercises, (rsEx, rNum) -> new Exercise(
+                    rsEx.getString("nome_esercizio"),
+                    rsEx.getInt("serie"),
+                    rsEx.getInt("ripetizioni")
+            ), id);
+
+            return new Training(id, nome, kcal, esercizi);
+        }, username);
+    }
+
+    public int getTotalExecutions(String username) {
+        String sql = """
+            SELECT SUM(dte.esecuzioni)
+            FROM Default_Trainings_Exec dte
+            JOIN Users u ON dte.ID_User = u.ID
+            WHERE u.username = ?
+            """;
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, username);
+        if (count != null) {
+            return count;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public void incrementDefaultExec(String username, int trainingId) {
+        String sqlId = "SELECT id, authority FROM Authorities WHERE username = ?";
+        Integer userId = jdbcTemplate.queryForObject(sqlId, Integer.class, username);
+
+        String sqlUpdate = "UPDATE Default_Trainings_Exec SET esecuzioni = esecuzioni + 1 WHERE ID_User = ? AND ID_Training = ?";
+        int rows = jdbcTemplate.update(sqlUpdate, userId, trainingId);
+        if (rows == 0) {
+            String sqlInsert = "INSERT INTO Default_Trainings_Exec (ID_User, ID_Training, esecuzioni) VALUES (?, ?, 1)";
+            jdbcTemplate.update(sqlInsert, userId, trainingId);
+        }
+    }
+
+    public void incrementPersonalizedExec(String username, int trainingId) {
+        String sqlId = "SELECT id FROM Users WHERE username = ?";
+        Integer userId = jdbcTemplate.queryForObject(sqlId, Integer.class, username);
+
+        String sqlUpdate = "UPDATE Personalized_Trainings_Exec SET esecuzioni = esecuzioni + 1 WHERE ID_User = ? AND ID_Training = ?";
+        jdbcTemplate.update(sqlUpdate, userId, trainingId);
     }
 }
