@@ -31,6 +31,12 @@ public class UserRepository {
     }
 
     @Transactional
+    public Integer getIdUser(String username){
+        String sqlId = "SELECT id FROM Users WHERE username=?";
+        return jdbcTemplate.queryForObject(sqlId, Integer.class, username);
+    }
+
+    @Transactional
     public void addUser(User user){
         //per convertire la data di nascita da GG/MM/AAAA a AAAA/MM/GG
         String data_nascita = user.getData_nascita();
@@ -42,8 +48,7 @@ public class UserRepository {
         userDetailsManager.createUser(new SecurityUser(user));
 
         //inserimento in Users_info, estraendo l'id da Users
-        String sqlId = "SELECT id FROM Users WHERE username=?";
-        Integer id = jdbcTemplate.queryForObject(sqlId, Integer.class, user.getUsername());
+        Integer id = getIdUser(user.getUsername());
         String sqlInfo ="INSERT INTO Users_info VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sqlInfo, id, user.getUsername(), user.getNome(), user.getCognome(), java.sql.Date.valueOf(data_nascita_conv), user.getEmail(), java.sql.Date.valueOf(java.time.LocalDate.now()));
     }

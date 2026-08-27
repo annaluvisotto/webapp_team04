@@ -1,10 +1,12 @@
 package it.unitn.disi.webapp_team04.controllers;
 
+import it.unitn.disi.webapp_team04.pojos.Recensione;
 import it.unitn.disi.webapp_team04.pojos.TrainingStats;
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
 import it.unitn.disi.webapp_team04.services.CheckUser;
+import it.unitn.disi.webapp_team04.services.Recensioni;
 import it.unitn.disi.webapp_team04.services.TrainingRest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,9 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +26,7 @@ public class UserDashboardController {
     TrainingRepository trainingRepository;
     CheckUser checkUser;
     TrainingRest trainingRest;
+    Recensioni recensioni; //service
 
     public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest) {
         this.userRepository = userRepository;
@@ -159,6 +160,13 @@ public class UserDashboardController {
         model.addAttribute("exec", esecuzioni);
 
         return "private/user/statistiche_user";
+    }
+
+    @PostMapping("/inserimento_recensione")
+    @ResponseBody
+    public Recensione inserisci_recensione(@RequestBody Recensione dati, Authentication authentication){
+        Recensione r = recensioni.addRecensione(dati.getTitolo(), dati.getTesto(), authentication.getName());
+        return r;
     }
 
 }
