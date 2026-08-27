@@ -1,6 +1,7 @@
 package it.unitn.disi.webapp_team04.controllers;
 
 import it.unitn.disi.webapp_team04.pojos.Recensione;
+import it.unitn.disi.webapp_team04.pojos.Training;
 import it.unitn.disi.webapp_team04.pojos.TrainingStats;
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
@@ -8,6 +9,7 @@ import it.unitn.disi.webapp_team04.repositories.UserRepository;
 import it.unitn.disi.webapp_team04.services.CheckUser;
 import it.unitn.disi.webapp_team04.services.Recensioni;
 import it.unitn.disi.webapp_team04.services.TrainingRest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -71,7 +73,7 @@ public class UserDashboardController {
     }
 
     @PostMapping("/gestione_upgrade")
-    public String gestione_upgrade(@RequestParam String ruolo, Authentication authentication, Model model){
+    public String gestione_upgrade(@RequestParam String ruolo, Authentication authentication){
         if (authentication == null || !authentication.isAuthenticated()) {
             return "redirect:/login";
         }
@@ -169,4 +171,57 @@ public class UserDashboardController {
         return r;
     }
 
+    @GetMapping("/allenamento")
+    public String allenamento(Authentication authentication, Model model){
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
+
+        String username = authentication.getName();
+        model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority());
+        model.addAttribute("nome", username);
+        model.addAttribute("activePage", "allenamento");
+        List<Training> defaultTrainings = trainingRest.getAllTrainingsComposition();
+        model.addAttribute("defaultTrainings", defaultTrainings);
+
+        if ("ROLE_USER_PRO".equals(model.getAttribute("authority"))) {
+            List<Training> customTrainings = trainingRepository.getPersonalizedTrainings(username);
+            for (Training custom : customTrainings) {
+                if (custom.getEsercizi() != null && !custom.getEsercizi().isEmpty()) {
+                    int kcal = trainingRest.getKcal(custom.getEsercizi());
+                    custom.setKcal(kcal);
+                }
+            }
+            model.addAttribute("customTrainings", customTrainings);
+        }
+
+        return "private/user/allenamento";
+    }
+
+    @PostMapping("/training/completed")
+    public String training_completed (@RequestParam("id") int id, @RequestParam("tipo") String tipo, Authentication authentication, HttpServletRequest request) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
+
+        String username = authentication.getName();
+        String authority = authentication.getAuthorities().iterator().next().getAuthority();
+        int totaleEsecuzioni = trainingRepository.getTotalExecutions(username);
+        if ("DEFAULT".equals(tipo)) {
+            if ("ROLE_USER_PROVA".equals(authority) && totaleEsecuzioni>=2) {
+                userRepository.disableUser(username);
+                request.getSession().invalidate();
+                SecurityContextHolder.clearContext();
+                return "redirect:/index";
+            }
+            else {
+                trainingRepository.incrementDefaultExec(username, id);
+            }
+        }
+        else if ("PERSONALIZED".equals(tipo)){
+            trainingRepository.incrementPersonalizedExec(username, id);
+        }
+
+        return "redirect:/dashboard";
+    }
 }

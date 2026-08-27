@@ -102,4 +102,8 @@ public class UserRepository {
         jdbcTemplate.update(sql, password, username);
     }
 
+    public void disableUser(String username) {
+        String sql = "UPDATE Users SET enabled = false WHERE username = ?";
+        jdbcTemplate.update(sql, username);
+    }
 }
