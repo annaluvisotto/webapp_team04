@@ -127,25 +127,30 @@ if (formRecensione) {
                 })
             });
             if (!response.ok) {
-                throw new Error("Errore nel loading del file JSON");
+                throw new Error("Errore nel loading del file JSON della recensione");
             }
             const json = await response.json();
 
-            const carosello = document.querySelector('.carousel-inner');
+            const carosello = document.querySelector('#caroselloRecensioni .carousel-inner');
+
+            const slideAttiva = carosello.querySelector('.active');
+            if (slideAttiva) {
+                slideAttiva.classList.remove('active');
+            }
+
             const nuovaRecensione = `
-                <div class="carousel-item">
-                    <div class="card mx-auto winx-profile-card" style="max-width: 800px; margin: 10px auto;">
-                        <div class="card-body p-4 text-center">
-                            <h5 class="fw-bold mb-3" style="color: var(--winx-text-dark); font-family: 'Playfair Display', serif;">
+                <div class="carousel-item active">
+                    <div class="card mx-auto text-center" style="width: 95%; max-width: 1200px; border: 2px dashed var(--winx-accent); border-radius: 12px; box-shadow: 4px 4px 0px rgba(176, 224, 230, 0.4); background-color: var(--winx-card);">
+                        <div class="card-body p-3">
+                            <h6 class="fw-bold mb-2" style="color: var(--winx-text-dark); font-family: 'Playfair Display', serif; font-size: 1.1rem;">
                                 "${json.titolo}"
-                            </h5>
-                            <p class="mb-4" style="color: var(--winx-text-main); font-weight: 300;">
+                            </h6>
+                            <p class="mb-1" style="color: var(--winx-text-main); font-family: 'Raleway', sans-serif; font-size: 0.9rem;">
                                 ${json.testo}
                             </p>
-                            <hr class="winx-divider my-2" style="width: 50%; margin: 0 auto;">
-                            <span class="text-muted fw-bold" style="font-size: 0.9rem;">
+                            <small class="text-muted fw-bold" style="font-size: 0.8rem;">
                                 - ${json.username}
-                            </span>
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -158,6 +163,46 @@ if (formRecensione) {
         }
     });
 }
+
+
+//gestione carosello recensioni
+async function caricaRecensioni(){
+    try{
+        const response = await fetch("/carosello_recensioni");
+        if (!response.ok) {
+            throw new Error("Errore nel loading del file JSON del carosello");
+        }
+        const json = await response.json();
+        let recensioniHTML = '';
+        const carosello = document.querySelector('#caroselloRecensioni .carousel-inner');
+
+        json.forEach(function(recensione, index) {
+            let classeAttiva = (index === 0) ? 'active' : '';
+            recensioniHTML += `
+                <div class="carousel-item ${classeAttiva}">
+                    <div class="card mx-auto text-center" style="width: 95%; max-width: 1200px; border: 2px dashed var(--winx-accent); border-radius: 12px; box-shadow: 4px 4px 0px rgba(176, 224, 230, 0.4); background-color: var(--winx-card);">
+                        <div class="card-body p-3">
+                            <h6 class="fw-bold mb-2" style="color: var(--winx-text-dark); font-family: 'Playfair Display', serif; font-size: 1.1rem;">
+                                "${recensione.titolo}"
+                            </h6>
+                            <p class="mb-1" style="color: var(--winx-text-main); font-family: 'Raleway', sans-serif; font-size: 0.9rem;">
+                                ${recensione.testo}
+                            </p>
+                            <small class="text-muted fw-bold" style="font-size: 0.8rem;">
+                                - ${recensione.username}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        carosello.innerHTML = recensioniHTML;
+    } catch{
+        console.log(error.message);
+    }
+}
+
+caricaRecensioni();
 
 
 

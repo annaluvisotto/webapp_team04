@@ -13,6 +13,13 @@ public class Recensione {
         this.username = username;
     }
 
+    public Recensione() {
+        this.titolo = "";
+        this.testo = "";
+        this.id_user = 0;
+        this.username = "";
+    }
+
     public String getTitolo() {
         return titolo;
     }
