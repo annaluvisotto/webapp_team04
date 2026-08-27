@@ -17,7 +17,7 @@
 
 <div class="app-layout">
 
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh; margin-top: 80px;">
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
 
         <div class="container text-center" style="margin-top: 110px;">
             <h3 class="display-8 fw-bold mb-3" style="color: var(--winx-text-main);">
@@ -74,15 +74,21 @@
                 });
             </script>
 
-        <th:block th:if="${authority == 'ROLE_USER_BASIC'}">
-            <div th:replace="~{/fragments :: navbarBasic}"></div>
-        </th:block>
 
-        <th:block th:if="${authority == 'ROLE_USER_PRO'}">
-            <div th:replace="~{/fragments :: navbarPro}"></div>
-        </th:block>
 
         </div>
+    </div>
+
+    <th:block th:if="${authority == 'ROLE_USER_BASIC'}">
+        <div th:replace="~{/fragments :: navbarBasic}"></div>
+    </th:block>
+
+    <th:block th:if="${authority == 'ROLE_USER_PRO'}">
+        <div th:replace="~{/fragments :: navbarPro}"></div>
+    </th:block>
+
+    <div class="mt-auto w-100">
+        <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

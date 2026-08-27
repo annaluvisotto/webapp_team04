@@ -2,7 +2,7 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Winx Fitness Club</title>
+    <title>Winx fitness club</title>
     <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 <div class="app-layout">
 
     <div class="container d-flex flex-column justify-content-center align-items-center"
-         style="min-height: 60vh; margin-top: 80px;">
+         style="min-height: 80vh; margin-top: 80px;">
 
         <div th:if="${messaggioSuccesso}" class="container mt-4">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,40 +27,32 @@
             </div>
         </div>
 
-        <div class="text-center">
-            <h1 class="display-4 fw-bold mb-3" style="color: var(--winx-text-dark);">
-                Benvenuto/a, <span th:text="${nome}"></span> !
+        <div class="text-center w-100 mb-5">
+            <h1 class="display-4 fw-bold" style="color: var(--winx-text-dark);">
+                Benvenuto/a, <span th:text="${nome}"></span>!
             </h1>
+        </div>
 
-            <div class="card mt-5 w-100"
-                 style="max-width: 600px; border-radius: 15px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                <div class="card-body p-4 text-start">
+        <div class="container w-100">
+            <div class="row align-items-center justify-content-center g-4">
 
-                    <h4 class="fw-bold mb-4 text-center" style="color: var(--winx-text-dark);">
-                        Lasciaci un commento!
-                    </h4>
+                <div class="col-12 col-lg-6">
+                    <div class="card w-100 h-100" style="border-radius: 15px; border: 2px dashed var(--winx-accent); box-shadow: 6px 6px 0px rgba(176, 224, 230, 0.4); background-color: var(--winx-card);">
+                        <div class="card-body p-4 text-start">
 
-                    <form id="formRecensione">
+                            <h4 class="fw-bold mb-4 text-center" style="color: var(--winx-text-dark);">
+                                Lasciaci un commento!
+                            </h4>
+                            <div th:replace="~{/fragments :: formRecensione}"></div>
 
-                        <div class="mb-3">
-                            <label for="titoloRecensione" class="form-label fw-semibold">Titolo:</label>
-                            <input type="text" class="form-control" id="titoloRecensione" name="titolo"
-                                   placeholder="Dai un titolo al tuo commento..." required>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="testoRecensione" class="form-label fw-semibold">Testo:</label>
-                            <textarea class="form-control" id="testoRecensione" name="testo" rows="4"
-                                      placeholder="Raccontaci la tua esperienza..." required></textarea>
-                        </div>
-
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary px-5 py-2">Inserisci recensione</button>
-                        </div>
-
-                    </form>
-
+                    </div>
                 </div>
+
+                <div class="col-12 col-lg-6">
+                    <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+                </div>
+
             </div>
         </div>
 

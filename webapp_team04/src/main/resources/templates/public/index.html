@@ -11,25 +11,28 @@
 </head>
 <body>
 
-<div class="container mt-3 text-center"> 
+<div class="container mt-3 text-center">
     <h1 class="mb-4">Winx fitness club <img th:src="@{/images/logo.png}" alt="Logo del centro" height="100"> </h1>
 </div>
 
-<div class="pink_elem">
+<div class="pink_elem container p-3">
     <div class="row align-items-center">
+
         <div class="col-md-3 text-end">
-            <img th:src="@{/images/bloom_gym.gif}" alt="I nostri clienti">
+            <img th:src="@{/images/bloom_gym.gif}" alt="I nostri clienti" class="img-fluid" style="max-height: 220px;">
         </div>
-        <div class="col-md-7 text-start">
-        <h3>La Filosofia del Winx fitness club</h3> 
-        <p class="lead"> Il nostro centro Winx fitness club da oggi ha una webApp nuova di zecca con lo scopo di aiutarti a pianificare tutti i tuoi allenamenti. La comodità di un personal trainer a portata di click è ora disponibile per ogmi dispositivo. 
-            Chi è tesserato presso il fitness club può registrarsi e gestire i propri allenamenti comodamente, in qualunque luogo e momento. Abbiamo creato tipologie di abbonamento adatte ad ogni cliente, a scelta tra Basic e Pro, con 3 allenamenti di prova gratuiti da poter fare quando preferisci.
-            Se cerchi allenamenti pronti o vuoi programmarli in modo personalizzato e averli sempre disponibili allora questa webApp fa per te!  Diventerai tonico e atletico come le più forti delle fate! </p>
+
+        <div class="col-md-9 text-start p-4">
+            <h4>La Filosofia del Winx fitness club</h4>
+
+            <p class="mb-0" style="font-size: 1rem;"> Il nostro centro Winx fitness club da oggi ha una webApp nuova di zecca con lo scopo di aiutarti a pianificare tutti i tuoi allenamenti. La comodità di un personal trainer a portata di click è ora disponibile per ogni dispositivo.
+                Chi è tesserato presso il fitness club può registrarsi e gestire i propri allenamenti comodamente, in qualunque luogo e momento. Abbiamo creato tipologie di abbonamento adatte ad ogni cliente, a scelta tra Basic e Pro, con 3 allenamenti di prova gratuiti da poter fare quando preferisci.
+                Se cerchi allenamenti pronti o vuoi programmarli in modo personalizzato e averli sempre disponibili allora questa webApp fa per te! Diventerai tonico e atletico come le più forti delle fate! </p>
         </div>
     </div>
-</div>  
+</div>
 
-<div class="d-flex justify-content-evenly mt-3">
+<div class="d-flex justify-content-evenly mt-3 mb-4">
     <div>
         <a th:href="@{/signup}" class="btn btn-primary">Registrati</a>
     </div>
@@ -40,6 +43,9 @@
         <a th:href="@{/contatti}" class="btn btn-primary">Contattaci</a>
     </div>
 </div>
+
+<div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+
 </body>
 
 <footer class="mt-3">

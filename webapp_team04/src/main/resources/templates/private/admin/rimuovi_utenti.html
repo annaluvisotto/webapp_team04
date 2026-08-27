@@ -12,15 +12,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body class="bg-light">
+<body>
 
 <div class="app-layout">
 
 
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="container d-flex flex-column flex-grow-1 justify-content-center align-items-center" style="min-height: 60vh; margin-top: 80px;">
 
         <div class="text-center">
-            <h3 class="display-8 fw-bold mb-3" style="color: var(--zen-text-dark);">
+            <h3 class="display-8 fw-bold mb-3">
                 Clicca qui per rimuovere gli utenti scaduti
             </h3>
 
@@ -32,6 +32,9 @@
     </div>
 
     <div th:replace="~{/fragments :: navbarAdmin}"></div>
+    <div class="mt-auto w-100">
+        <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+    </div>
 
 </div>
 
