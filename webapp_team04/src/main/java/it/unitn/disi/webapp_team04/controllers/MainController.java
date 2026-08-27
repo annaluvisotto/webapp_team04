@@ -63,8 +63,15 @@ public class MainController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(Authentication authentication) {
+    public String dashboard(@RequestParam(name = "success", required = false) String success, Model model, Authentication authentication) {
         String view;
+
+        if ("password".equals(success)) {
+            model.addAttribute("messaggioSuccesso", "Password aggiornata con successo!");
+        } else if ("upgrade".equals(success)) {
+            model.addAttribute("messaggioSuccesso", "Upgrade completato! Benvenuto/a nel tuo nuovo piano");
+        }
+
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
             view = "forward:dashboard_admin";
         else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER_PROVA")))
