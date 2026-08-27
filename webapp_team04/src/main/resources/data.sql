@@ -91,3 +91,7 @@ VALUES ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allename
        ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg curl', 3, 10),
        ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Leg extension', 4, 9),
        ((SELECT ID_Training FROM Personalized_Trainings_Exec WHERE nome_allenamento = 'Lower'), (SELECT ID FROM Users WHERE username = 'pro'), 'Calf machine', 4, 9);
+
+INSERT INTO Reviews (ID_User, title, text)
+VALUES ('2', 'Palestra carina!', 'Ho trovato questa palestra molto carina e fornita, i personal trainer sono stati molto competenti!'),
+       ('3', 'Mai più...', 'Gli attrezzi sono rotti e la gente scortese, non ci tornerò mai più!');

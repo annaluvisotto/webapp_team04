@@ -4,6 +4,7 @@ import it.unitn.disi.webapp_team04.pojos.Recensione;
 import it.unitn.disi.webapp_team04.pojos.Training;
 import it.unitn.disi.webapp_team04.pojos.TrainingStats;
 import it.unitn.disi.webapp_team04.pojos.User;
+import it.unitn.disi.webapp_team04.repositories.RecensioneRepository;
 import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
 import it.unitn.disi.webapp_team04.services.CheckUser;
@@ -25,16 +26,18 @@ import java.util.*;
 public class UserDashboardController {
     UserRepository userRepository;
     TrainingRepository trainingRepository;
+    RecensioneRepository recensioneRepository;
     CheckUser checkUser;
     TrainingRest trainingRest;
     Recensioni recensioni;
 
-    public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest, Recensioni recensioni) {
+    public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest, Recensioni recensioni, RecensioneRepository recensioneRepository) {
         this.userRepository = userRepository;
         this.trainingRepository = trainingRepository;
         this.checkUser = checkUser;
         this.trainingRest = trainingRest;
         this.recensioni = recensioni;
+        this.recensioneRepository = recensioneRepository;
     }
 
     @GetMapping("/profilo")
@@ -169,6 +172,12 @@ public class UserDashboardController {
     public Recensione inserisci_recensione(@RequestBody Recensione dati, Authentication authentication){
         Recensione r = recensioni.addRecensione(dati.getTitolo(), dati.getTesto(), authentication.getName());
         return r;
+    }
+
+    @GetMapping("/carosello_recensioni")
+    @ResponseBody
+    public List<Recensione> carosello_recensioni(){
+        return recensioneRepository.getRecensioni();
     }
 
     @GetMapping("/allenamento")
