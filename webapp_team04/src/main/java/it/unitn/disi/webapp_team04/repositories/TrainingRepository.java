@@ -110,15 +110,15 @@ public class TrainingRepository {
             int kcal = 0;
 
             String sqlExercises = """
-                SELECT nome_esercizio, serie, ripetizioni
-                FROM Personalized_Exercises_Info
+                SELECT nome_esercizio, numero_serie, numero_ripetizioni
+                FROM Personalized_Trainings_Info
                 WHERE ID_Training = ?
                 """;
 
             List<Exercise> esercizi = jdbcTemplate.query(sqlExercises, (rsEx, rNum) -> new Exercise(
                     rsEx.getString("nome_esercizio"),
-                    rsEx.getInt("serie"),
-                    rsEx.getInt("ripetizioni")
+                    rsEx.getInt("numero_serie"),
+                    rsEx.getInt("numero_ripetizioni")
             ), id);
 
             return new Training(id, nome, kcal, esercizi);

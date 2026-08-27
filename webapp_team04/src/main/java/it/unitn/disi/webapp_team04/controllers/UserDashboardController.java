@@ -27,13 +27,14 @@ public class UserDashboardController {
     TrainingRepository trainingRepository;
     CheckUser checkUser;
     TrainingRest trainingRest;
-    Recensioni recensioni; //service
+    Recensioni recensioni;
 
-    public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest) {
+    public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest, Recensioni recensioni) {
         this.userRepository = userRepository;
         this.trainingRepository = trainingRepository;
         this.checkUser = checkUser;
         this.trainingRest = trainingRest;
+        this.recensioni = recensioni;
     }
 
     @GetMapping("/profilo")
