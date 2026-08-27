@@ -83,8 +83,7 @@ public class UserDashboardController {
                 Collections.singletonList(nuovaAuthority)
         );
         SecurityContextHolder.getContext().setAuthentication(nuovaAutenticazione);
-        model.addAttribute("activePage", "upgrade");
-        return "private/user/upgrade_confirmation";
+        return "redirect:/dashboard?success=upgrade"; //per l'alert
     }
 
     @GetMapping("/cambio_pw")
@@ -109,9 +108,8 @@ public class UserDashboardController {
             return "private/user/cambio_pw";
         }
         else{
-            model.addAttribute("activePage", "cambio_pw");
             model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority());
-            return "private/user/cambiopw_confirmation";
+            return "redirect:/dashboard?success=password"; //per l'alert
         }
     }
 
