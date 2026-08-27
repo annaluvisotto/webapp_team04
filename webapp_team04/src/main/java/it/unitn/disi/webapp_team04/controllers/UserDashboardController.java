@@ -11,6 +11,7 @@ import it.unitn.disi.webapp_team04.services.CheckUser;
 import it.unitn.disi.webapp_team04.services.Recensioni;
 import it.unitn.disi.webapp_team04.services.TrainingRest;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,9 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class UserDashboardController {
@@ -202,16 +201,19 @@ public class UserDashboardController {
                     custom.setKcal(kcal);
                 }
             }
-            model.addAttribute("customTrainings", customTrainings);
+            model.addAttribute("personalizedTrainings", customTrainings);
         }
 
         return "private/user/allenamento";
     }
 
     @PostMapping("/training/completed")
-    public String training_completed (@RequestParam("id") int id, @RequestParam("tipo") String tipo, Authentication authentication, HttpServletRequest request) {
+    @ResponseBody
+    public Map<String, Object> training_completed (@RequestParam("id") int id, @RequestParam("tipo") String tipo, Authentication authentication, HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
         if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/login";
+            response.put("redirect", "/login");
+            return response;
         }
 
         String username = authentication.getName();
@@ -222,7 +224,9 @@ public class UserDashboardController {
                 userRepository.disableUser(username);
                 request.getSession().invalidate();
                 SecurityContextHolder.clearContext();
-                return "redirect:/index";
+                response.put("alert", "Hai completato 3/3 allenamenti. Questo account non è più valido.");
+                response.put("redirect", "/index");
+                return response;
             }
             else {
                 trainingRepository.incrementDefaultExec(username, id);
@@ -232,6 +236,7 @@ public class UserDashboardController {
             trainingRepository.incrementPersonalizedExec(username, id);
         }
 
-        return "redirect:/dashboard";
+        response.put("redirect", "/dashboard");
+        return response;
     }
 }

@@ -13,18 +13,17 @@
 </head>
 <body class="bg-light">
 
-<div class="d-flex align-items-center justify-content-center vh-100">
+<main class="container flex-grow-1" style="padding-top: 100px; padding-bottom: 30px;">
 
-    <div class="col-md-10 col-lg-8">
-
-        <div class="container text-center" style="margin-top: 110px;">
+        <div class="container text-center">
             <h3 class="display-8 fw-bold mb-3" style="color: var(--winx-text-main);">
                 Programmi di allenamento
             </h3>
             <p class="text-muted">Seleziona un programma per visualizzarne i dettagli ed eseguirlo.</p>
         </div>
 
-        <div class="row row-cols-3 g-5 mb-5">
+        <div class="row row-cols-4 g-5 mb-5">
+
             <div class="col" th:each="prog : ${defaultTrainings}">
                 <div class="accordion shadow-sm" th:id="'DefContainer' + ${prog.id}">
                     <div class="accordion-item" style="border: 2px solid var(--winx-accent); border-radius: 10px; overflow: hidden;">
@@ -35,7 +34,7 @@
                             </button>
                         </h2>
 
-                        <div th:id="'DefBody' + ${prog.id}" class="accordion-collapse collapse show" th:aria-labelledby="'DefHead' + ${prog.id}">
+                        <div th:id="'DefBody' + ${prog.id}" class="accordion-collapse collapse" th:aria-labelledby="'DefHead' + ${prog.id}">
                             <div class="accordion-body bg-light">
                                 <div class="table-responsive mb-3">
                                     <table class="table table-sm table-striped table-bordered align-middle text-center bg-white m-0">
@@ -47,10 +46,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="es : ${prog.es}">
+                                        <tr th:each="es : ${prog.esercizi}">
                                             <td class="text-start" th:text="${es.nome}">Nome esercizio</td>
                                             <td th:text="${es.serie}">Numero serie</td>
-                                            <td th:text="${es.ripetizioni}">Numero ripetizioni</td>
+                                            <td th:text="${es.reps}">Numero ripetizioni</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -84,7 +83,7 @@
                             </button>
                         </h2>
 
-                        <div th:id="'PersBody' + ${prog.id}" class="accordion-collapse collapse show" th:aria-labelledby="'PersHead' + ${prog.id}">
+                        <div th:id="'PersBody' + ${prog.id}" class="accordion-collapse collapse" th:aria-labelledby="'PersHead' + ${prog.id}">
                             <div class="accordion-body bg-light">
                                 <div class="table-responsive mb-3">
                                     <table class="table table-sm table-striped table-bordered align-middle text-center bg-white m-0">
@@ -96,10 +95,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="es : ${prog.es}">
+                                        <tr th:each="es : ${prog.esercizi}">
                                             <td class="text-start" th:text="${es.nome}">Nome esercizio</td>
                                             <td th:text="${es.serie}">Numero serie</td>
-                                            <td th:text="${es.ripetizioni}">Numero ripetizioni</td>
+                                            <td th:text="${es.reps}">Numero ripetizioni</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -124,34 +123,41 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+</main>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    const userRole = /*[[${authority}]]*/ '';
-    const execPrec = /*[[${totaleEsecuzioni}]]*/ 0;
-
+<script> //fetch asincrono per l'allert della scadenza degli allenamenti di prova
     document.querySelectorAll('.training-sub').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            if (userRole === 'ROLE_USER_PROVA' && execPrec >= 2) {
-                alert("Hai completato 3/3 allenamenti. Questo account non è più valido");
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch(this.action, {method: 'POST', body: new URLSearchParams(formData)});
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.alert) {
+                        alert(data.alert);
+                    }
+                    window.location.href = data.redirect;
+                }
+            } catch (error) {
+                console.error('Errore durante il salvataggio:', error);
             }
         });
     });
-    /*]]>*/
 </script>
 
 <th:block th:if="${authority == 'ROLE_USER_PROVA'}">
-    <div th:replace="~{fragments :: navbarProva}"></div>
+    <div th:replace="~{/fragments :: navbarProva}"></div>
 </th:block>
 
 <th:block th:if="${authority == 'ROLE_USER_BASIC'}">
-    <div th:replace="~{fragments :: navbarBasic}"></div>
+    <div th:replace="~{/fragments :: navbarBasic}"></div>
 </th:block>
 
 <th:block th:if="${authority == 'ROLE_USER_PRO'}">
-    <div th:replace="~{fragments :: navbarPro}"></div>
+    <div th:replace="~{/fragments :: navbarPro}"></div>
 </th:block>
 
 <div class="mt-auto w-100">
