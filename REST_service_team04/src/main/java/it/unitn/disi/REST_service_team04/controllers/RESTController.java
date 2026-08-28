@@ -33,4 +33,7 @@ public class RESTController {
     public float calorie(@RequestBody List<Esercizio> listaEs) {
         return progs.calcCalorie(listaEs);
     }
+
+    @GetMapping("/exercises")
+    public List<Esercizio> getEs() {return progs.getEs();}
 }

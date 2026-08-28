@@ -11,6 +11,10 @@ public class Esercizio {
 
     public Esercizio(){}
 
+    public Esercizio(String nome){
+        this.nome = nome;
+    }
+
     public Esercizio(String nome, int serie, int reps, Float kcal){
         this.nome = nome;
         this.serie = serie;

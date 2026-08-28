@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS Personalized_Trainings_Exec(
     ID_User INT NOT NULL,
     nome_allenamento varchar(32) NOT NULL,
     esecuzioni INT,
-    FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE
+    FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE,
+    CONSTRAINT user_nome_allenamento UNIQUE (ID_User, nome_allenamento)
     );
 
 CREATE TABLE IF NOT EXISTS Personalized_Trainings_Info(

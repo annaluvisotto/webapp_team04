@@ -69,4 +69,10 @@ public class ProgrammiRepository {
             return kcal.getFirst();
         }
     }
+
+    public List<Esercizio> AllEs() {
+        String sqlEsercizi = "SELECT nome_esercizio FROM Exercises";
+        RowMapper<Esercizio> rowMapper = (res, righe) -> new Esercizio(res.getString("nome_esercizio"));
+        return jdbc.query(sqlEsercizi, rowMapper);
+    }
 }

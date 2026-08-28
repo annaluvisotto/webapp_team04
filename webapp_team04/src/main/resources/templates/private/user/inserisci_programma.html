@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Winx fitness club</title>
+    <link rel="icon" type="image/png" th:href="@{/images/logo.png}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/style.css?v=4.0}">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-3">
+        <h2 class="text-center mb-4">Crea il tuo allenamento personalizzato</h2>
+        <h4>L'allenamento deve contenere almeno un esercizio e per ogni esercizio inserito sono obbligatori il numero di serie e di ripetizioni</h4>
+
+        <form th:action="@{/addPersTraining}" method="POST" id="PersTraining">
+
+            <div th:if="${errore != null}" class="alert alert-danger mb-3" role="alert" th:text="${errore}">Errore!</div>
+
+            <div class="mb-4 mt-4">
+                <label for="trainingName" class="form-label fw-bold">Nome allenamento</label>
+                <input type="text" class="form-control" id="trainingName" name="nome" placeholder="Inserisci il nome del tuo allenamento" required>
+            </div>
+
+            <div id="esercizi">
+                <div class="card p-3 mb-3 bg-white border esercizio-item" data-index="0">
+                        <div class="col-md-3">
+                            <label class="form-label small">Esercizio</label>
+                            <select name="esercizi[0].nome" class="form-select select-esercizio" required>
+                                <option value="" disabled selected>Seleziona l'esercizio</option>
+                                <option th:each="ex : ${catalogoEsercizi}" th:value="${ex.nome}" th:text="${ex.nome}">Panca piana</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Serie</label>
+                            <input type="number" name="esercizi[0].serie" class="form-control" placeholder="Numero serie" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Ripetizioni</label>
+                            <input type="number" name="esercizi[0].reps" class="form-control" placeholder="Numero ripetizioni" required>
+                        </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    <button type="button" class="btn btn-primary" id="addEx">+ Aggiungi altri esercizi</button>
+                    <span id="exerciseCounter"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary" id="addTr">Salva Programma</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        const MAX_ESERCIZI = 25;
+        const container = document.getElementById('esercizi');
+        const btnAdd = document.getElementById('addEx');
+        const ExOptions = document.querySelector('.select-esercizio').innerHTML;
+        const form = document.getElementById('PersTraining');
+
+        function updateCounter() {
+            const total = container.querySelectorAll('.esercizio-item').length;
+            btnAdd.disabled = total >= MAX_ESERCIZI;
+        }
+
+        function reindexExercises() {
+            const items = container.querySelectorAll('.esercizio-item');
+            items.forEach((item, index) => {
+                item.setAttribute('data-i', i);
+                item.querySelector('input[name*=".nome"]').name = `esercizi[${i}].nome`;
+                item.querySelector('input[name*=".serie"]').name = `esercizi[${i}].serie`;
+                item.querySelector('input[name*=".reps"]').name = `esercizi[${i}].reps`;
+            });
+            updateCounter();
+        }
+
+        function validaEsercizio(item) {
+            const fields = item.querySelectorAll('select, input');
+            for (let field of fields) {
+                if (!field.checkValidity()) {
+                    field.reportValidity();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        btnAdd.addEventListener('click', (e) => {
+            e.preventDefault();
+            const items = container.querySelectorAll('.esercizio-item');
+            const currentCount = items.length;
+            if (currentCount >= MAX_ESERCIZI) return;
+            const lastItem = items[items.length - 1];
+            if (lastItem && !validaEsercizio(lastItem)) {
+                return;
+            }
+
+            const index = currentCount;
+            const div = document.createElement('div');
+            div.className = 'card p-3 mb-3 bg-white border esercizio-item';
+            div.setAttribute('data-index', index);
+
+            div.innerHTML = `
+                <div class="d-flex justify-content-end mb-2">
+                    <button type="button" class="btn btn-primary btn-remove">Rimuovi l'esercizio</button>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small">Nome Esercizio</label>
+                    <select name="esercizi[${index}].nome" class="form-select select-esercizio" required>
+                                <option value="" disabled selected>Seleziona l' esercizio</option>
+                                ${ExOptions}
+                            </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small">Serie</label>
+                    <input type="number" name="esercizi[${index}].serie" class="form-control" placeholder="Numero serie" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small">Ripetizioni</label>
+                    <input type="number" name="esercizi[${index}].reps" class="form-control" placeholder="Numero ripetizioni" required>
+                </div>
+            </div>
+        `;
+
+            div.querySelector('.btn-remove').addEventListener('click', () => {
+                div.remove();
+            });
+            container.appendChild(div);
+            updateCounter();
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new URLSearchParams(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    if (data.alert) {
+                        alert(data.alert);
+                    }
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    }
+                }
+            } catch (error) {
+                console.error("Errore durante la richiesta:", error);
+            }
+        });
+    </script>
+
+
+<th:block th:if="${authority == 'ROLE_USER_PRO'}">
+    <div th:replace="~{/fragments :: navbarPro}"></div>
+</th:block>
+
+<div class="mt-auto w-100">
+    <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+</div>
+
+<script th:src="@{/script.js}"> </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

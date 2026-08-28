@@ -35,6 +35,6 @@ public class ProgrammiService {
         return tot;
     }
 
-
+    public List<Esercizio> getEs() {return programmiRepository.AllEs();}
 
 }

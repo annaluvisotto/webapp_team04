@@ -1,9 +1,6 @@
 package it.unitn.disi.webapp_team04.controllers;
 
-import it.unitn.disi.webapp_team04.pojos.Recensione;
-import it.unitn.disi.webapp_team04.pojos.Training;
-import it.unitn.disi.webapp_team04.pojos.TrainingStats;
-import it.unitn.disi.webapp_team04.pojos.User;
+import it.unitn.disi.webapp_team04.pojos.*;
 import it.unitn.disi.webapp_team04.repositories.RecensioneRepository;
 import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
@@ -237,6 +234,53 @@ public class UserDashboardController {
         }
 
         response.put("redirect", "/dashboard");
+        return response;
+    }
+
+    @GetMapping("/inserisci_programma")
+    public String inserisci_programma(Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
+
+        String authority = authentication.getAuthorities().iterator().next().getAuthority();
+        if (!"ROLE_USER_PRO".equals(authority)) {
+            return "redirect:/dashboard";
+        }
+
+        List<Exercise> catalogoEsercizi = trainingRest.getAllExercises();
+        model.addAttribute("catalogoEsercizi", catalogoEsercizi);
+        model.addAttribute("authority", authority);
+
+        return "private/user/inserisci_programma";
+    }
+
+    @PostMapping("/addPersTraining")
+    @ResponseBody
+    public Map<String, Object> salvaAllenamento(@ModelAttribute Training training, Authentication authentication, Model model) {
+        Map<String, Object> response = new HashMap<>();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            response.put("redirect", "/login");
+            return response;
+        }
+
+        String username = authentication.getName();
+        String authority = authentication.getAuthorities().iterator().next().getAuthority();
+
+        if (!trainingRepository.uniquePersonalizedTraining(username, training.getNome())) {
+            response.put("error", "Hai già un allenamento con questo nome.");
+            return response;
+        }
+
+        if (training.getEsercizi() != null && !training.getEsercizi().isEmpty()) {
+            trainingRepository.savePersonalizedTraining(username, training);
+        }
+
+        int totKcal = trainingRest.getKcal(training.getEsercizi());
+        response.put("alert", "Allenamento salvato con successo!\nConsumo totale: " + totKcal + " kcal");
+        response.put("redirect", "/dashboard");
+
         return response;
     }
 }

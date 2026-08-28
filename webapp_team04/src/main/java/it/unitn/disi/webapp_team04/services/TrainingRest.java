@@ -16,6 +16,7 @@ public class TrainingRest {
     private final String progsUrl = "http://localhost:8081/Default-programs";
     private final String progIdUrl = "http://localhost:8081/programs/{id}";
     private final String kcalUrl = "http://localhost:8081/kcal";
+    private final String exercisesUrl = "http://localhost:8081/exercises";
 
     public List<TrainingStats> getAllTrainings() {
         try {
@@ -81,5 +82,21 @@ public class TrainingRest {
             }
         }
         return trainings;
+    }
+
+    public List<Exercise> getAllExercises() {
+        try {
+            Exercise[] res = restTemplate.getForObject(exercisesUrl, Exercise[].class);
+            if (res != null){
+                return Arrays.asList(res);
+            }
+            else{
+                return List.of();
+            }
+        } catch (Exception e) {
+            System.err.println("ERRORE CHIAMATA REST (getAllExercises): " + e.getMessage());
+            e.printStackTrace();
+            return List.of();
+        }
     }
 }

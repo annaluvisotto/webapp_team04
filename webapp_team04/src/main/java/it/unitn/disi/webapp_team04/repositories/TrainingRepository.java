@@ -160,4 +160,38 @@ public class TrainingRepository {
         String sqlUpdate = "UPDATE Personalized_Trainings_Exec SET esecuzioni = esecuzioni + 1 WHERE ID_User = ? AND ID_Training = ?";
         jdbcTemplate.update(sqlUpdate, userId, trainingId);
     }
+
+    public boolean uniquePersonalizedTraining(String username, String nomeAllenamento) {
+        String sql = "SELECT COUNT(*) FROM Personalized_Trainings_Exec pte JOIN Users u ON pte.ID_User = u.ID WHERE u.username = ? AND pte.nome_allenamento = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, username, nomeAllenamento.trim());
+        return (count != null && count == 0);
+    }
+
+    public void savePersonalizedTraining(String username, Training training) {
+        String sqlUser = "SELECT ID FROM Users WHERE username = ?";
+        Integer userId = jdbcTemplate.queryForObject(sqlUser, Integer.class, username);
+
+        String sqlTraining = "INSERT INTO Personalized_Trainings_Exec (ID_User, nome_allenamento, esecuzioni) VALUES (?, ?, 0)";
+        jdbcTemplate.update(sqlTraining, userId, training.getNome());
+
+        String sqlTrainingId = "SELECT ID_Training FROM Personalized_Trainings_Exec WHERE ID_User = ? AND nome_allenamento = ?";
+        int trainingId = jdbcTemplate.queryForObject(sqlTrainingId, Integer.class, userId, training.getNome());
+
+        if (training.getEsercizi() != null && !training.getEsercizi().isEmpty()) {
+            String sqlExInfo = """
+                INSERT INTO Personalized_Trainings_Info (ID_Training, ID_user, nome_esercizio, numero_serie, numero_ripetizioni)
+                VALUES (?, ?, ?, ?, ?)
+                """;
+
+            for (Exercise ex : training.getEsercizi()) {
+                jdbcTemplate.update(sqlExInfo,
+                        trainingId,
+                        userId,
+                        ex.getNome(),
+                        ex.getSerie(),
+                        ex.getReps()
+                );
+            }
+        }
+    }
 }
