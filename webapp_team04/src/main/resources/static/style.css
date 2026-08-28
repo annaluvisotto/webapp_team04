@@ -90,6 +90,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-control, .form-select {
+    display: block !important;
     background-color: #FFFFFF;
     border: 2px solid var(--winx-primary);
     color: var(--winx-text-main);
@@ -278,16 +279,14 @@ hr.winx-divider {
 #message {
     display: none;
     background-color: var(--winx-card);
-    border: 2px solid var(--winx-accent);
+    border: 2px solid var(--winx-primary);
     border-radius: 8px;
     box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
     color: var(--winx-text-dark);
-
-    /* Nessun posizionamento assoluto: ora spinge i contenuti in basso */
     width: 100%;
-    padding: 20px; /* Padding leggermente aumentato per far respirare il box */
+    padding: 20px;
     margin-top: 8px;
-    margin-bottom: 15px; /* Spazio extra prima del campo "Ripeti password" */
+    margin-bottom: 15px;
 }
 
 #message h6 {
