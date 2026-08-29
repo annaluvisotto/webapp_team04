@@ -15,8 +15,12 @@
 <body class="bg-light">
 
     <div class="container mt-3">
-        <h2 class="text-center mb-4">Crea il tuo allenamento personalizzato</h2>
-        <h4>L'allenamento deve contenere almeno un esercizio e per ogni esercizio inserito sono obbligatori il numero di serie e di ripetizioni</h4>
+        <div class="container text-center">
+            <h3 class="display-8 fw-bold mb-3" style="color: var(--winx-text-main);">
+                Crea il tuo allenamento
+            </h3>
+            <p class="text-muted">Ogni allenamento deve avere almeno un esercizio e ciascuno degli esercizi deve essere caratterizzato dal numero di serie e di ripetizioni</p>
+        </div>
 
         <form th:action="@{/addPersTraining}" method="POST" id="PersTraining">
 

@@ -206,31 +206,47 @@ public class UserDashboardController {
 
     @PostMapping("/training/completed")
     @ResponseBody
-    public Map<String, Object> training_completed (@RequestParam("id") int id, @RequestParam("tipo") String tipo, Authentication authentication, HttpServletRequest request) {
+    public Map<String, Object> training_completed (@RequestParam(value = "id", required = false) Integer id, @RequestParam("tipo") String tipo, Authentication authentication, HttpServletRequest request) {
         Map<String, Object> response = new HashMap<>();
         if (authentication == null || !authentication.isAuthenticated()) {
             response.put("redirect", "/login");
             return response;
         }
 
+        if (id == null) {
+            System.err.println("Errore: ID allenamento nullo per tipo " + tipo);
+            response.put("alert", "Errore: ID dell'allenamento non valido.");
+            response.put("redirect", "/allenamento");
+            return response;
+        }
+
         String username = authentication.getName();
         String authority = authentication.getAuthorities().iterator().next().getAuthority();
         int totaleEsecuzioni = trainingRepository.getTotalExecutions(username);
-        if ("DEFAULT".equals(tipo)) {
-            if ("ROLE_USER_PROVA".equals(authority) && totaleEsecuzioni>=2) {
-                userRepository.disableUser(username);
-                request.getSession().invalidate();
-                SecurityContextHolder.clearContext();
-                response.put("alert", "Hai completato 3/3 allenamenti. Questo account non è più valido.");
-                response.put("redirect", "/index");
-                return response;
+
+        try {
+            if ("DEFAULT".equals(tipo)) {
+                if ("ROLE_USER_PROVA".equals(authority) && totaleEsecuzioni>=2) {
+                    userRepository.disableUser(username);
+                    request.getSession().invalidate();
+                    SecurityContextHolder.clearContext();
+                    response.put("alert", "Hai completato 3/3 allenamenti. Questo account non è più valido.");
+                    response.put("redirect", "/index");
+                    return response;
+                }
+                else {
+                    trainingRepository.incrementDefaultExec(username, id);
+                    response.put("alert", "Allenamento di default completato con successo!");
+                }
             }
-            else {
-                trainingRepository.incrementDefaultExec(username, id);
+            else if ("PERSONALIZED".equals(tipo)){
+                trainingRepository.incrementPersonalizedExec(username, id);
+                response.put("alert", "Allenamento personalizzato completato con successo!");
             }
-        }
-        else if ("PERSONALIZED".equals(tipo)){
-            trainingRepository.incrementPersonalizedExec(username, id);
+        } catch (Exception e) {
+            System.err.println("Errore salvataggio esecuzione: " + e.getMessage());
+            response.put("alert", "Si è verificato un errore durante il salvataggio.");
+            response.put("redirect", "/allenamento");
         }
 
         response.put("redirect", "/dashboard");

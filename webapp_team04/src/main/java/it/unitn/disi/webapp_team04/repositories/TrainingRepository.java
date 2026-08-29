@@ -142,7 +142,7 @@ public class TrainingRepository {
     }
 
     public void incrementDefaultExec(String username, int trainingId) {
-        String sqlId = "SELECT id, authority FROM Authorities WHERE username = ?";
+        String sqlId = "SELECT id FROM Authorities WHERE username = ?";
         Integer userId = jdbcTemplate.queryForObject(sqlId, Integer.class, username);
 
         String sqlUpdate = "UPDATE Default_Trainings_Exec SET esecuzioni = esecuzioni + 1 WHERE ID_User = ? AND ID_Training = ?";
