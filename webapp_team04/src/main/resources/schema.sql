@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Default_Trainings_Exec(
     ID_Training INT NOT NULL,
     esecuzioni INT,
     PRIMARY KEY (ID_Training, ID_User),
-    FOREIGN KEY (ID_User) REFERENCES Users(ID)
+    FOREIGN KEY (ID_User) REFERENCES Users(ID) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS Personalized_Trainings_Exec(
