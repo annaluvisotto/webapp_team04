@@ -102,8 +102,18 @@ public class UserRepository {
         jdbcTemplate.update(sql, password, username);
     }
 
+    @Transactional
     public void disableUser(String username) {
         String sql = "UPDATE Users SET enabled = false WHERE username = ?";
         jdbcTemplate.update(sql, username);
+    }
+
+    @Transactional
+    public Integer removeDisabledUsers(){
+        String getRemovedId = "SELECT COUNT(*) FROM Users WHERE enabled=false";
+        Integer num_users = jdbcTemplate.queryForObject(getRemovedId, Integer.class);
+        String sql = "DELETE FROM Users WHERE enabled=false";
+        jdbcTemplate.update(sql);
+        return num_users;
     }
 }

@@ -16,7 +16,6 @@
 
 <div class="app-layout">
 
-
     <div class="container d-flex flex-column flex-grow-1 justify-content-center align-items-center" style="min-height: 60vh; margin-top: 80px;">
 
         <div class="text-center">
@@ -24,9 +23,12 @@
                 Clicca qui per rimuovere gli utenti scaduti
             </h3>
 
-            <button class="btn btn-primary">
-                Rimuovi
-            </button>
+            <form th:action="@{/elimina_disabilitati}" method="POST" id="rimuoviUtenti" class="mb-3">
+                <button type="submit" class="btn btn-primary px-5 py-2">Rimuovi</button>
+            </form>
+
+            <h5 id="utentiRimossi" class="h5 fw-normal mt-4" style="color: var(--winx-text-main);">
+            </h5>
         </div>
 
     </div>
@@ -38,7 +40,6 @@
 
 </div>
 
-<!--Da inserire il numero di utenti rimossi (tramite js)-->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/script.js}"> </script>

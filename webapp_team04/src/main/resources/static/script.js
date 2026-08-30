@@ -8,6 +8,7 @@ const erroreConferma = document.getElementById("errore-conferma");
 const btnReset = document.getElementById("res");
 const formPassword = document.getElementById("cambiopw");
 const formRecensione = document.getElementById("formRecensione");
+const rimuoviUtenti = document.getElementById("rimuoviUtenti");
 
 function controlloPassword() {
     //controllo formato password
@@ -110,6 +111,26 @@ if (formPassword) {
     });
 }
 
+//gestione rimozione utenti prova disablitati
+if(rimuoviUtenti){
+    rimuoviUtenti.addEventListener("submit", async function(e){
+        e.preventDefault();
+        try {
+            const response = await fetch("/elimina_disabilitati", {method: 'POST'});
+            if (!response.ok) {
+                throw new Error("Errore nell'eliminazione degli user prova disabilitati");
+            }
+            const text = await response.text(); //uso .text anzichè .json perchè il controller torna una stringa
+            const utentiRimossi = document.getElementById("utentiRimossi");
+            const numero = `Sono stati rimossi <span class="winx-badge-counter">${text}</span> utenti prova`;
+            utentiRimossi.innerHTML = numero;
+        }
+        catch(error){
+            console.log(error.message);
+        }
+    })
+}
+
 
 //gestione invio recensione
 if (formRecensione) {
@@ -166,8 +187,8 @@ if (formRecensione) {
 
 
 //gestione carosello recensioni
-async function caricaRecensioni(){
-    try{
+async function caricaRecensioni() {
+    try {
         const response = await fetch("/carosello_recensioni");
         if (!response.ok) {
             throw new Error("Errore nel loading del file JSON del carosello");
@@ -176,7 +197,7 @@ async function caricaRecensioni(){
         let recensioniHTML = '';
         const carosello = document.querySelector('#caroselloRecensioni .carousel-inner');
 
-        json.forEach(function(recensione, index) {
+        json.forEach(function (recensione, index) {
             let classeAttiva = (index === 0) ? 'active' : '';
             recensioniHTML += `
                 <div class="carousel-item ${classeAttiva}">
@@ -197,7 +218,7 @@ async function caricaRecensioni(){
             `;
         });
         carosello.innerHTML = recensioniHTML;
-    } catch{
+    } catch {
         console.log(error.message);
     }
 }

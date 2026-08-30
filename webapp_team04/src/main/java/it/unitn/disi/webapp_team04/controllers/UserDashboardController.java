@@ -26,7 +26,7 @@ public class UserDashboardController {
     RecensioneRepository recensioneRepository;
     CheckUser checkUser;
     TrainingRest trainingRest;
-    Recensioni recensioni;
+    Recensioni recensioni; //service
 
     public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest, Recensioni recensioni, RecensioneRepository recensioneRepository) {
         this.userRepository = userRepository;
