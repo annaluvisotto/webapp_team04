@@ -19,7 +19,12 @@ public class TrainingRepository {
         String sqlId = "SELECT id FROM Users WHERE username=?";
         String idUser = jdbcTemplate.queryForObject(sqlId, String.class, username);
         String sqlExec = "SELECT SUM(esecuzioni) FROM Default_Trainings_Exec WHERE ID_User=?";
-        return jdbcTemplate.queryForObject(sqlExec, Integer.class, idUser);
+        Integer count = jdbcTemplate.queryForObject(sqlExec, Integer.class, idUser);
+
+        if (count == null) {
+            return 0;
+        }
+        return count;
     }
 
     public List<List<TrainingStats>> gatAdminStats()
