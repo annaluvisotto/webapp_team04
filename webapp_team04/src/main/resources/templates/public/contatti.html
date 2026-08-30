@@ -44,25 +44,6 @@
 
 </div>
 
-<script th:inline="javascript">
-    const btnInvia = document.getElementById('btn-invia');
-    const redirectUrl = /*[[@{/index}]]*/ '/index';
-
-    btnInvia.addEventListener('click', function () {
-        const nome = document.getElementById('uname').value.trim();
-        const email = document.getElementById('mail').value.trim();
-        const msg = document.getElementById('note').value.trim();
-
-        if (!nome || !email || !msg) {
-            alert("Compila tutti i campi prima di inviare.");
-            return;
-        }
-
-        alert("Grazie! Il tuo messaggio è stato inviato con successo.");
-        window.location.href = redirectUrl;
-    });
-</script>
-
 <div class="mt-auto w-100">
     <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
 </div>

@@ -132,6 +132,179 @@ if(rimuoviUtenti){
 }
 
 
+
+//gestione contatti
+const btnInvia = document.getElementById('btn-invia');
+const redirectUrl = /*[[@{/index}]]*/ '/index';
+
+if(btnInvia){
+    btnInvia.addEventListener('click', function () {
+        const nome = document.getElementById('uname').value.trim();
+        const email = document.getElementById('mail').value.trim();
+        const msg = document.getElementById('note').value.trim();
+
+        if (!nome || !email || !msg) {
+            alert("Compila tutti i campi prima di inviare.");
+            return;
+        }
+
+        alert("Grazie! Il tuo messaggio è stato inviato con successo.");
+        window.location.href = redirectUrl;
+    });
+}
+
+
+//gestione inserimento allenamento (user pro)
+document.querySelectorAll('.training-sub').forEach(form => {
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+
+        try {
+            const response = await fetch(this.action, {method: 'POST', body: new URLSearchParams(formData)});
+            if (response.ok) {
+                const data = await response.json();
+
+                if (data.alert) {
+                    alert(data.alert);
+                }
+                window.location.href = data.redirect;
+            }
+        } catch (error) {
+            console.error('Errore durante il salvataggio:', error);
+        }
+    });
+});
+
+
+//gestione allenamento (tutti gli user)
+const MAX_ESERCIZI = 25;
+const container = document.getElementById('esercizi');
+const btnAdd = document.getElementById('addEx');
+
+const form = document.getElementById('PersTraining');
+
+if(container && btnAdd){
+
+    const ExOptions = document.querySelector('.select-esercizio').innerHTML;
+    function updateCounter() {
+        const total = container.querySelectorAll('.esercizio-item').length;
+        btnAdd.disabled = total >= MAX_ESERCIZI;
+    }
+
+    function reindexExercises() {
+        const items = container.querySelectorAll('.esercizio-item');
+        items.forEach((item, index) => {
+            item.setAttribute('data-index', index);
+            /*item.querySelector('input[name*=".nome"]').name = `esercizi[${i}].nome`;
+            item.querySelector('input[name*=".serie"]').name = `esercizi[${i}].serie`;
+            item.querySelector('input[name*=".reps"]').name = `esercizi[${i}].reps`;*/
+            const selectNome = item.querySelector('select[name*=".nome"]');
+            if(selectNome) selectNome.name = `esercizi[${index}].nome`;
+
+            const inputSerie = item.querySelector('input[name*=".serie"]');
+            if(inputSerie) inputSerie.name = `esercizi[${index}].serie`;
+
+            const inputReps = item.querySelector('input[name*=".reps"]');
+            if(inputReps) inputReps.name = `esercizi[${index}].reps`;
+        });
+        updateCounter();
+    }
+
+    function validaEsercizio(item) {
+        const fields = item.querySelectorAll('select, input');
+        for (let field of fields) {
+            if (!field.checkValidity()) {
+                field.reportValidity();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    btnAdd.addEventListener('click', (e) => {
+        e.preventDefault();
+        const items = container.querySelectorAll('.esercizio-item');
+        const currentCount = items.length;
+        if (currentCount >= MAX_ESERCIZI) return;
+        const lastItem = items[items.length - 1];
+        if (lastItem && !validaEsercizio(lastItem)) {
+            return;
+        }
+
+        const index = currentCount;
+        const div = document.createElement('div');
+        div.className = 'card p-3 mb-3 bg-white border esercizio-item';
+        div.setAttribute('data-index', index);
+
+        div.innerHTML = `
+            <div class="d-flex justify-content-end mb-2">
+                <button type="button" class="btn btn-primary btn-remove">Rimuovi l'esercizio</button>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small">Nome Esercizio</label>
+                <select name="esercizi[${index}].nome" class="form-select select-esercizio" required>
+                            <option value="" disabled selected>Seleziona l' esercizio</option>
+                            ${ExOptions}
+                        </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small">Serie</label>
+                <input type="number" name="esercizi[${index}].serie" class="form-control" placeholder="Numero serie" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label small">Ripetizioni</label>
+                <input type="number" name="esercizi[${index}].reps" class="form-control" placeholder="Numero ripetizioni" required>
+            </div>
+    `;
+
+        div.querySelector('.btn-remove').addEventListener('click', () => {
+            div.remove();
+            reindexExercises();
+        });
+        container.appendChild(div);
+        updateCounter();
+    });
+}
+
+
+if(form){
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                alert(data.error);
+            } else {
+                if (data.alert) {
+                    alert(data.alert);
+                }
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            }
+        } catch (error) {
+            console.error("Errore durante la richiesta:", error);
+        }
+    });
+}
+
+
+
 //gestione invio recensione
 if (formRecensione) {
     formRecensione.addEventListener("submit", async function (e) {

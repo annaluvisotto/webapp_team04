@@ -126,29 +126,6 @@
         </div>
 </main>
 
-<script>
-    document.querySelectorAll('.training-sub').forEach(form => {
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-
-            try {
-                const response = await fetch(this.action, {method: 'POST', body: new URLSearchParams(formData)});
-                if (response.ok) {
-                    const data = await response.json();
-
-                    if (data.alert) {
-                        alert(data.alert);
-                    }
-                    window.location.href = data.redirect;
-                }
-            } catch (error) {
-                console.error('Errore durante il salvataggio:', error);
-            }
-        });
-    });
-</script>
-
 <th:block th:if="${authority == 'ROLE_USER_PROVA'}">
     <div th:replace="~{/fragments :: navbarProva}"></div>
 </th:block>
