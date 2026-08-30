@@ -1,7 +1,3 @@
--- login con username: admin, pw: admin
--- login con username: prova, pw: prova
--- login con username: basic, pw: basic
--- login con username: pro, pw: pro
 INSERT INTO Users (username, password, enabled)
 VALUES ('admin04', '$2a$10$Wi6V6USdBWOtVAr78wBAQeqc7zgws.swTJ9pSE7jjEf0Qomfy6pFC', true),
         ('prova104', '$2a$10$Dmn2Qa7lQ.4i.D8Oe1nCZeQnqUW0lem0qnhvS7OQt7IjCfqviMKla', true),
