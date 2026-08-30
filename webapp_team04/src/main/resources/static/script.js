@@ -58,13 +58,14 @@ if (formSignup) {
         let formValido = true;
 
         //controllo formato data GG/MM/AAAA
-        const dataSpezzata = dataNascita.value.split('/');
-        if (dataSpezzata.length !== 3 || dataSpezzata[0].length !== 2 || dataSpezzata[1].length !== 2 || dataSpezzata[2].length !== 4) {
+        const formatoData = /^\d{2}\/\d{2}\/\d{4}$/;
+        if (!formatoData.test(dataNascita.value)) {
             erroreData.innerHTML = "Formato della data non valido (GG/MM/AAAA)";
             formValido = false;
         }
         //controllo utente maggiorenne (solo se il formato della data è corretto)
         else {
+            const dataSpezzata = dataNascita.value.split('/');
             const giorno = parseInt(dataSpezzata[0], 10);
             const mese = parseInt(dataSpezzata[1], 10);
             const anno = parseInt(dataSpezzata[2], 10);

@@ -1,27 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap');
 
 :root {
-    /* Palette Winx Pastello Base */
     --winx-pastel-pink: #FFD1DC;
     --winx-pastel-blue: #B0E0E6;
     --winx-pastel-yellow: #FDFD96;
-
-    /* Variabili Architetturali Ripristinate */
     --winx-bg-light: #FDFBFD;
     --winx-card: #FFFFFF;
-    --winx-text-main: #4A4E69; /* Grigio-blu scuro per alto contrasto */
+    --winx-text-main: #4A4E69;
     --winx-text-muted: #9CA3AF;
-
-    /* Mappatura delle dipendenze cromatiche sui nuovi pastelli */
     --winx-primary: var(--winx-pastel-pink);
-    --winx-primary-hover: #FFB6C1; /* Rosa leggermente più intenso per l'hover */
+    --winx-primary-hover: #FFB6C1;
     --winx-accent: var(--winx-pastel-blue);
     --winx-text-dark: var(--winx-text-main);
-
     --zen-text-dark: #3E463E;
     --zen-text-muted: #9A9A92;
-
-    /* Offset geometrico per le ombre solide */
     --winx-solid-offset: 6px;
 }
 
@@ -32,7 +24,6 @@ body {
     font-family: 'Raleway', sans-serif;
     min-height: 100vh;
     margin: 0;
-    /*padding-bottom: 100px;*/
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,22 +33,13 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
 }
 
-/* Nodi Strutturali: Estetica Vettoriale e Bordi Solidi */
 .card, .cardlogin, .sidebar {
     background-color: var(--winx-card);
     border: 2px solid var(--winx-accent);
     border-radius: 8px;
     box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
     color: var(--winx-text-dark);
-    /*transition: transform 0.2s ease, box-shadow 0.2s ease;*/
 }
-
-/*
-.card:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 10px 10px 0px rgba(176, 224, 230, 0.6);
-}
-*/
 
 .card-header {
     background-color: transparent;
@@ -65,7 +47,6 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 1.5rem;
 }
 
-/* Interfacce di Input e Call to Action */
 .btn-primary {
     background-color: var(--winx-primary);
     border: 2px solid var(--winx-text-dark);
@@ -110,17 +91,15 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--winx-text-muted) !important;
 }
 
-/* Override architetturale per il componente .lead di Bootstrap */
 .lead {
     font-family: 'Raleway', sans-serif !important;
     font-weight: 300 !important;
 }
 
-/* Modelli di Selezione (Radio Button) */
 .piano-radio {
-    opacity: 0;         /* Lo rende trasparente */
-    position: absolute; /* Lo toglie dall'ingombro della pagina */
-    z-index: -1;        /* Lo spinge dietro la card */
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 .piano-card {
@@ -148,15 +127,11 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
 }
 
-/* Sidebar Verticale */
-/* Refactoring del componente Offcanvas di Bootstrap (Tema Winx) */
 .winx-topbar {
     background-color: var(--winx-bg-light) !important;
-    /* Linea tratteggiata azzurro pastello per separare il viewport */
     border-bottom: 3px dashed var(--winx-accent) !important;
 }
 
-/* Override Tipografico per il Brand della Navbar (es. "Dashboard Admin") */
 .winx-topbar .navbar-brand {
     font-family: 'Playfair Display', serif !important;
     font-size: 1.8rem !important;
@@ -165,29 +140,15 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
 }
 
-/*
-   Ridefinizione del bounding box per il pannello Offcanvas.
-   Invece di ancorarlo al 100% dell'altezza e al margine destro,
-   creiamo un offset (distacco) per renderlo una finestra flottante.
-*/
+
 .offcanvas.winx-floating-menu {
     background-color: var(--winx-card) !important;
-
-    /* Applicazione dell'offset spaziale dai bordi del viewport */
     top: 16px !important;
     right: 16px !important;
     bottom: 16px !important;
-
-    /* Ricalcolo dinamico dell'altezza: 100% della viewport minus 32px (16px top + 16px bottom) */
     height: calc(100vh - 32px) !important;
-
-    /* Curvatura topologica simmetrica su tutti i vertici */
     border-radius: 24px !important;
-
-    /* Bordo perimetrale completo e tratteggiato */
     border: 3px dashed var(--winx-primary) !important;
-
-    /* Ombra vettoriale per accentuare il distacco dal livello base (z-index) */
     box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
 }
 
@@ -221,8 +182,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .zen-navbar .nav-link.active {
-    color: var(--zen-primary) !important;
-    border-bottom: 2px solid var(--zen-primary);
+    color: var(--winx-primary) !important;
+    border-bottom: 2px solid var(--winx-primary);
 }
 
 .pink_elem {
@@ -232,46 +193,34 @@ h1, h2, h3, h4, h5, h6 {
     border-color: var(--winx-primary-hover);
     outline: none;
 }
-/* Modifica del pulsante toggle (hamburger menu) per allinearlo al tema */
+
 .custom-toggler {
     border: 2px solid var(--winx-accent) !important;
     border-radius: 8px;
     background-color: var(--winx-card);
 }
 
-/* Componente Architetturale: Card Profilo Flottante */
 .winx-profile-card {
     background-color: var(--winx-card) !important;
     border: 3px dashed var(--winx-primary) !important;
     border-radius: 24px !important;
     box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
-    /* Evita conflitti di rendering sui margini interni nativi della card */
     border-collapse: separate;
 }
 
-/* Modifica del Nodo Separatore (HR) */
-/* Modifica del Nodo Separatore (HR) */
 hr.winx-divider {
-    /* Riassegnazione della dipendenza cromatica al rosa primario */
     border-top: 3px dashed var(--winx-primary) !important;
-    /* Reset rigoroso dell'opacità per sovrascrivere le specifiche di Bootstrap */
     opacity: 1 !important;
     margin: 1.5rem 0;
 }
 
-/* Override delle proprietà di riempimento del glifo vettoriale */
 .winx-avatar-svg {
     fill: var(--winx-primary);
-    /* Utilizzo del motore di compositing per applicare un'ombra che segue i contorni del vettore */
     filter: drop-shadow(4px 4px 0px rgba(176, 224, 230, 0.5));
 }
 
-/* Soppressione della mutazione topologica ereditata dalla classe .card base */
 .winx-profile-card:hover {
-    /* Ripristina la matrice di trasformazione allo stato di identità spaziale */
     transform: none !important;
-
-    /* Congela il calcolo vettoriale dell'ombra, mantenendolo identico allo stato di riposo */
     box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
 }
 
@@ -305,9 +254,8 @@ hr.winx-divider {
     margin-bottom: 0;
 }
 
-/* Regole dinamiche gestite da JS */
 .valid {
-    color: #7b9e76; /* Verde salvia */
+    color: #7b9e76;
     transition: color 0.3s ease;
 }
 
@@ -319,7 +267,7 @@ hr.winx-divider {
 }
 
 .invalid {
-    color: #e07a7a; /* Rosso pastello */
+    color: #e07a7a;
     transition: color 0.3s ease;
 }
 

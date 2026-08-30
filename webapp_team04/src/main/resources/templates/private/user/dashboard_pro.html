@@ -35,8 +35,6 @@
 
     <div class="container w-100">
       <div class="row align-items-center justify-content-center g-4">
-
-        <!-- COLONNA SINISTRA: Il Form -->
         <div class="col-12 col-lg-6">
           <div class="card w-100 h-100" style="border-radius: 15px; border: 2px dashed var(--winx-accent); box-shadow: 6px 6px 0px rgba(176, 224, 230, 0.4); background-color: var(--winx-card);">
             <div class="card-body p-4 text-start">
@@ -45,16 +43,13 @@
                 Lasciaci un commento!
               </h4>
 
-              <!-- Richiamo il frammento del form che avevi creato -->
               <div th:replace="~{/fragments :: formRecensione}"></div>
 
             </div>
           </div>
         </div>
 
-        <!-- COLONNA DESTRA: Il Carosello -->
         <div class="col-12 col-lg-6">
-          <!-- Richiamo il frammento del carosello -->
           <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
         </div>
 
