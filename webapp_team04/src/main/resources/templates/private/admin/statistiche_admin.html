@@ -32,57 +32,6 @@
                 </div>
             </div>
 
-            <script th:inline="javascript">
-                const nomi = /*[[${nomi}]]*/ [];
-                const datiBasic = /*[[${datiBasic}]]*/ [];
-                const datiPro = /*[[${datiPro}]]*/ [];
-                const rootStyles = getComputedStyle(document.documentElement);
-                const coloreBasic = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
-                const colorePro = rootStyles.getPropertyValue('--winx-pastel-blue').trim();
-                const grafico = document.getElementById('adminStatsChart').getContext('2d');
-
-                new Chart(grafico, {
-                    type: 'bar',
-                    data: {
-                        labels: nomi,
-                        datasets: [
-                            {
-                                label: 'Media Utenti Basic',
-                                data: datiBasic,
-                                backgroundColor: coloreBasic,
-                            },
-                            {
-                                label: 'Media Utenti Pro',
-                                data: datiPro,
-                                backgroundColor: colorePro,
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Numero Medio di Esecuzioni'
-                                }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Allenamenti'
-                                }
-                            }
-                        }
-                    }
-                });
-            </script>
-
         </div>
     </div>
     <div th:replace="~{/fragments :: navbarAdmin}"></div>
@@ -91,6 +40,11 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </div>
+<script th:inline="javascript">
+    const nomi = /*[[${nomi}]]*/ [];
+    const datiBasic = /*[[${datiBasic}]]*/ [];
+    const datiPro = /*[[${datiPro}]]*/ [];
+</script>
 <script th:src="@{/script.js}"> </script>
 </body>
 </html>

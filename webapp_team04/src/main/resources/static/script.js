@@ -113,8 +113,8 @@ if (formPassword) {
 }
 
 //gestione rimozione utenti prova disablitati
-if(rimuoviUtenti){
-    rimuoviUtenti.addEventListener("submit", async function(e){
+if (rimuoviUtenti) {
+    rimuoviUtenti.addEventListener("submit", async function (e) {
         e.preventDefault();
         try {
             const response = await fetch("/elimina_disabilitati", {method: 'POST'});
@@ -125,20 +125,18 @@ if(rimuoviUtenti){
             const utentiRimossi = document.getElementById("utentiRimossi");
             const numero = `Sono stati rimossi <span class="winx-badge-counter">${text}</span> utenti prova`;
             utentiRimossi.innerHTML = numero;
-        }
-        catch(error){
+        } catch (error) {
             console.log(error.message);
         }
     })
 }
 
 
-
 //gestione contatti
 const btnInvia = document.getElementById('btn-invia');
 const redirectUrl = /*[[@{/index}]]*/ '/index';
 
-if(btnInvia){
+if (btnInvia) {
     btnInvia.addEventListener('click', function () {
         const nome = document.getElementById('uname').value.trim();
         const email = document.getElementById('mail').value.trim();
@@ -157,7 +155,7 @@ if(btnInvia){
 
 //gestione inserimento allenamento (user pro)
 document.querySelectorAll('.training-sub').forEach(form => {
-    form.addEventListener('submit', async function(event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
         const formData = new FormData(this);
 
@@ -185,9 +183,10 @@ const btnAdd = document.getElementById('addEx');
 
 const form = document.getElementById('PersTraining');
 
-if(container && btnAdd){
+if (container && btnAdd) {
 
     const ExOptions = document.querySelector('.select-esercizio').innerHTML;
+
     function updateCounter() {
         const total = container.querySelectorAll('.esercizio-item').length;
         btnAdd.disabled = total >= MAX_ESERCIZI;
@@ -201,13 +200,13 @@ if(container && btnAdd){
             item.querySelector('input[name*=".serie"]').name = `esercizi[${i}].serie`;
             item.querySelector('input[name*=".reps"]').name = `esercizi[${i}].reps`;*/
             const selectNome = item.querySelector('select[name*=".nome"]');
-            if(selectNome) selectNome.name = `esercizi[${index}].nome`;
+            if (selectNome) selectNome.name = `esercizi[${index}].nome`;
 
             const inputSerie = item.querySelector('input[name*=".serie"]');
-            if(inputSerie) inputSerie.name = `esercizi[${index}].serie`;
+            if (inputSerie) inputSerie.name = `esercizi[${index}].serie`;
 
             const inputReps = item.querySelector('input[name*=".reps"]');
-            if(inputReps) inputReps.name = `esercizi[${index}].reps`;
+            if (inputReps) inputReps.name = `esercizi[${index}].reps`;
         });
         updateCounter();
     }
@@ -269,8 +268,8 @@ if(container && btnAdd){
 }
 
 
-if(form){
-    form.addEventListener('submit', async function(e) {
+if (form) {
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         if (!form.checkValidity()) {
@@ -303,6 +302,104 @@ if(form){
         }
     });
 }
+
+//gestione statistiche user
+const canvasGrafico1 = document.getElementById('userStatsChart');
+
+if (canvasGrafico1) {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const colore = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
+    const grafico = canvasGrafico1.getContext('2d');
+
+    new Chart(grafico, {
+        type: 'bar',
+        data: {
+            labels: nomi,
+            datasets: [
+                {
+                    label: 'Esecuzioni',
+                    data: executions,
+                    backgroundColor: colore
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    },
+                    title: {
+                        display: true,
+                        text: 'Esecuzioni'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Allenamenti'
+                    }
+                }
+            }
+        }
+    });
+}
+
+
+//gestione statistiche admin
+const canvasGrafico2 = document.getElementById('adminStatsChart');
+
+if(canvasGrafico2){
+    const rootStyles = getComputedStyle(document.documentElement);
+    const coloreBasic = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
+    const colorePro = rootStyles.getPropertyValue('--winx-pastel-blue').trim();
+    const grafico = canvasGrafico2.getContext('2d');
+
+    new Chart(grafico, {
+        type: 'bar',
+        data: {
+            labels: nomi,
+            datasets: [
+                {
+                    label: 'Media Utenti Basic',
+                    data: datiBasic,
+                    backgroundColor: coloreBasic,
+                },
+                {
+                    label: 'Media Utenti Pro',
+                    data: datiPro,
+                    backgroundColor: colorePro,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    },
+                    title: {
+                        display: true,
+                        text: 'Numero Medio di Esecuzioni'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Allenamenti'
+                    }
+                }
+            }
+        }
+    });
+}
+
 
 
 
