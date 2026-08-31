@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--winx-card);
     border: 2px solid var(--winx-accent);
     border-radius: 8px;
-    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
+    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px var(--winx-accent);
     color: var(--winx-text-dark);
 }
 
@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-control, .form-select {
     display: block !important;
-    background-color: #FFFFFF;
+    background-color: var(--winx-card);
     border: 2px solid var(--winx-primary);
     color: var(--winx-text-main);
     border-radius: 12px;
@@ -80,7 +80,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-control:focus, .form-select:focus {
     border-color: var(--winx-accent);
-    box-shadow: 0 0 10px rgba(176, 224, 230, 0.6);
+    box-shadow: 0 0 10px var(--winx-accent);
     outline: none;
 }
 
@@ -102,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .piano-radio:checked + .piano-card {
     border: 2px solid var(--winx-accent);
-    background-color: #F4FAFB;
+    background-color: var(--winx-bg-light);
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0px var(--winx-accent);
     display: inline-block;
@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
     height: calc(100vh - 32px) !important;
     border-radius: 24px !important;
     border: 3px dashed var(--winx-primary) !important;
-    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+    box-shadow: -8px 8px 0px var(--winx-accent) !important;
 }
 
 .offcanvas-header {
@@ -148,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .offcanvas-body .nav-link:hover {
-    background-color: #FFF2F7;
+    background-color: var(--winx-bg-light);
     color: var(--winx-text-dark);
     transform: translateX(6px);
     box-shadow: 4px 4px 0px var(--winx-primary);
@@ -180,7 +180,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--winx-card) !important;
     border: 3px dashed var(--winx-primary) !important;
     border-radius: 24px !important;
-    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+    box-shadow: -8px 8px 0px var(--winx-accent) !important;
     border-collapse: separate;
 }
 
@@ -192,12 +192,12 @@ hr.winx-divider {
 
 .winx-avatar-svg {
     fill: var(--winx-primary);
-    filter: drop-shadow(4px 4px 0px rgba(176, 224, 230, 0.5));
+    filter: drop-shadow(4px 4px 0px var(--winx-accent));
 }
 
 .winx-profile-card:hover {
     transform: none !important;
-    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
+    box-shadow: -8px 8px 0px var(--winx-accent) !important;
 }
 
 /* Stile del Box Messaggi */
@@ -206,7 +206,7 @@ hr.winx-divider {
     background-color: var(--winx-card);
     border: 2px solid var(--winx-primary);
     border-radius: 8px;
-    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
+    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px var(--winx-accent);
     color: var(--winx-text-dark);
     width: 100%;
     padding: 20px;
