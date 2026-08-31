@@ -94,7 +94,7 @@ public class MainController {
     public String dashboard_prova(Authentication authentication, Model model) {
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "dashboard");
-        model.addAttribute("esecuzioni", trainingRepository.getExec(authentication.getName()));
+        model.addAttribute("esecuzioni", trainingRepository.getTotalExecutions(authentication.getName()));
         return "private/user/dashboard_prova";
     }
 

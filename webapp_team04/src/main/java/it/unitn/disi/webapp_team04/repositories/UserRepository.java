@@ -25,7 +25,6 @@ public class UserRepository {
         this.userDetailsManager = userDetailsManager;
     }
 
-    //questo controllo verrà eseguito dal controller
     public boolean checkUsername(String username){
         return userDetailsManager.userExists(username);
     }

@@ -34,15 +34,15 @@
     </div>
 
     <th:block th:if="${authority == 'ROLE_USER_BASIC'}">
-        <div th:replace="~{/fragments :: navbarBasic}"></div>
+        <div th:replace="~{fragments :: navbarBasic}"></div>
     </th:block>
 
     <th:block th:if="${authority == 'ROLE_USER_PRO'}">
-        <div th:replace="~{/fragments :: navbarPro}"></div>
+        <div th:replace="~{fragments :: navbarPro}"></div>
     </th:block>
 
     <div class="mt-auto w-100">
-        <div th:replace="~{/fragments :: caroselloRecensioni}"></div>
+        <div th:replace="~{fragments :: caroselloRecensioni}"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

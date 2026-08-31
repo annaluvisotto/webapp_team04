@@ -214,7 +214,6 @@ public class UserDashboardController {
         }
 
         if (id == null) {
-            System.err.println("Errore: ID allenamento nullo per tipo " + tipo);
             response.put("alert", "Errore: ID dell'allenamento non valido.");
             response.put("redirect", "/allenamento");
             return response;

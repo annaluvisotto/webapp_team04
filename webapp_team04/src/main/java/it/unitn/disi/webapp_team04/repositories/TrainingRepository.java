@@ -15,19 +15,7 @@ public class TrainingRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int getExec(String username){
-        String sqlId = "SELECT id FROM Users WHERE username=?";
-        String idUser = jdbcTemplate.queryForObject(sqlId, String.class, username);
-        String sqlExec = "SELECT SUM(esecuzioni) FROM Default_Trainings_Exec WHERE ID_User=?";
-        Integer count = jdbcTemplate.queryForObject(sqlExec, Integer.class, idUser);
-
-        if (count == null) {
-            return 0;
-        }
-        return count;
-    }
-
-    public List<List<TrainingStats>> gatAdminStats()
+    public List<List<TrainingStats>> getAdminStats()
     {
         String sql = """
                 WITH avgB AS (

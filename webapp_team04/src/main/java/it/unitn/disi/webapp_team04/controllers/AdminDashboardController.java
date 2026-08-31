@@ -62,7 +62,7 @@ public class AdminDashboardController {
         }
         model.addAttribute("nome", authentication.getName());
         model.addAttribute("activePage", "statistiche_admin");
-        List<List<TrainingStats>> adminStats = trainingRepository.gatAdminStats();
+        List<List<TrainingStats>> adminStats = trainingRepository.getAdminStats();
         List<TrainingStats> trainings = trainingRest.getAllTrainings();
 
         List<String> nomi = new ArrayList<>();
