@@ -38,7 +38,7 @@ public class SecurityConfig{
                 .failureForwardUrl("/login_failure")
         );
 
-        //autorizzazione --> da modificare man mano, questo è l'esempio della prof
+        //autorizzazione
         http.authorizeHttpRequests(c ->
                 c.requestMatchers("/dashboard", "/logout").hasAnyRole("ADMIN", "USER_PROVA", "USER_BASIC", "USER_PRO")
                         .requestMatchers("/profilo", "/cambio_pw", "/gestione_cambiopw", "/inserimento_recensione", "/training/completed").hasAnyRole("USER_PROVA", "USER_BASIC", "USER_PRO")

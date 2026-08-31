@@ -112,6 +112,17 @@ if (formPassword) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const parametriURL = new URLSearchParams(window.location.search);
+    const tipoSuccesso = parametriURL.get("success");
+    if (tipoSuccesso === "upgrade") {
+        alert("Upgrade completato! Benvenuto nel tuo nuovo piano");
+    } else if (tipoSuccesso === "password") {
+        alert("Password aggiornata con successo!");
+    }
+});
+
+
 //gestione rimozione utenti prova disablitati
 if (rimuoviUtenti) {
     rimuoviUtenti.addEventListener("submit", async function (e) {

@@ -19,14 +19,6 @@
   <div class="container d-flex flex-column justify-content-center align-items-center"
        style="min-height: 60vh; margin-top: 80px;">
 
-    <div th:if="${messaggioSuccesso}" class="container mt-4">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <i class="fa-solid fa-circle-check me-2"></i>
-        <span th:text="${messaggioSuccesso}"></span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Chiudi"></button>
-      </div>
-    </div>
-
     <div class="text-center w-100 mb-5">
       <h1 class="display-4 fw-bold" style="color: var(--winx-text-dark);">
         Benvenuto/a, <span th:text="${nome}"></span> !
