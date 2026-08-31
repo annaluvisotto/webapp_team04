@@ -24,8 +24,6 @@
 
         <form th:action="@{/addPersTraining}" method="POST" id="PersTraining">
 
-            <div th:if="${errore != null}" class="alert alert-danger mb-3" role="alert" th:text="${errore}">Errore!</div>
-
             <div class="mb-4 mt-4">
                 <label for="trainingName" class="form-label fw-bold">Nome allenamento</label>
                 <input type="text" class="form-control" id="trainingName" name="nome" placeholder="Inserisci il nome del tuo allenamento" required>
