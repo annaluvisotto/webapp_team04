@@ -30,52 +30,6 @@
                     <canvas id="userStatsChart"></canvas>
                 </div>
             </div>
-
-            <script th:inline="javascript">
-                const nomi = /*[[${nomi}]]*/ [];
-                const exec = /*[[${exec}]]*/ [];
-                const rootStyles = getComputedStyle(document.documentElement);
-                const colore = rootStyles.getPropertyValue('--winx-pastel-pink').trim();
-                const grafico = document.getElementById('userStatsChart').getContext('2d');
-
-                new Chart(grafico, {
-                    type: 'bar',
-                    data: {
-                        labels: nomi,
-                        datasets: [
-                            {
-                                label: 'Esecuzioni',
-                                data: exec,
-                                backgroundColor: colore
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Esecuzioni'
-                                }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Allenamenti'
-                                }
-                            }
-                        }
-                    }
-                });
-            </script>
-
-
         </div>
     </div>
 
@@ -92,6 +46,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:inline="javascript">
+        const nomi = /*[[${nomi}]]*/ [];
+        const executions = /*[[${exec}]]*/ [];
+    </script>
     <script th:src="@{/script.js}"></script>
 </div>
 </body>

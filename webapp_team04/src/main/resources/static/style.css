@@ -12,8 +12,6 @@
     --winx-primary-hover: #FFB6C1;
     --winx-accent: var(--winx-pastel-blue);
     --winx-text-dark: var(--winx-text-main);
-    --zen-text-dark: #3E463E;
-    --zen-text-muted: #9A9A92;
     --winx-solid-offset: 6px;
 }
 
@@ -37,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--winx-card);
     border: 2px solid var(--winx-accent);
     border-radius: 8px;
-    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px rgba(176, 224, 230, 0.4);
+    box-shadow: var(--winx-solid-offset) var(--winx-solid-offset) 0px var(--winx-accent);
     color: var(--winx-text-dark);
 }
 
@@ -149,7 +147,6 @@ h1, h2, h3, h4, h5, h6 {
     height: calc(100vh - 32px) !important;
     border-radius: 24px !important;
     border: 3px dashed var(--winx-primary) !important;
-    box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
 }
 
 .offcanvas-header {
@@ -224,7 +221,6 @@ hr.winx-divider {
     box-shadow: -8px 8px 0px rgba(176, 224, 230, 0.4) !important;
 }
 
-/* Stile del Box Messaggi */
 #message {
     display: none;
     background-color: var(--winx-card);
@@ -252,28 +248,4 @@ hr.winx-divider {
     padding: 5px 0 5px 35px;
     font-size: 14px;
     margin-bottom: 0;
-}
-
-.valid {
-    color: #7b9e76;
-    transition: color 0.3s ease;
-}
-
-.valid:before {
-    position: relative;
-    left: -25px;
-    content: "✔";
-    font-weight: bold;
-}
-
-.invalid {
-    color: #e07a7a;
-    transition: color 0.3s ease;
-}
-
-.invalid:before {
-    position: relative;
-    left: -25px;
-    content: "✖";
-    font-weight: bold;
 }
