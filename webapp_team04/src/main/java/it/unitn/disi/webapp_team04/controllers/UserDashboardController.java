@@ -267,7 +267,7 @@ public class UserDashboardController {
         List<Exercise> catalogoEsercizi = trainingRest.getAllExercises();
         model.addAttribute("catalogoEsercizi", catalogoEsercizi);
         model.addAttribute("authority", authority);
-
+        model.addAttribute("activePage", "inserisci_programma");
         return "private/user/inserisci_programma";
     }
 
