@@ -41,11 +41,11 @@ public class SecurityConfig{
         //autorizzazione
         http.authorizeHttpRequests(c ->
                 c.requestMatchers("/dashboard", "/logout").hasAnyRole("ADMIN", "USER_PROVA", "USER_BASIC", "USER_PRO")
-                        .requestMatchers("/profilo", "/cambio_pw", "/gestione_cambiopw", "/inserimento_recensione", "/training/completed").hasAnyRole("USER_PROVA", "USER_BASIC", "USER_PRO")
+                        .requestMatchers("/profilo", "/cambio_pw", "/gestione_cambiopw", "/inserimento_recensione", "/training/completed", "/allenamento").hasAnyRole("USER_PROVA", "USER_BASIC", "USER_PRO")
                         .requestMatchers("/dashboard_admin", "/lista_utenti", "/rimuovi_utenti", "/elimina_disabilitati","/statistiche_admin").hasRole("ADMIN")
                         .requestMatchers("/dashboard_pro", "/inserisci_programma", "/addPersTraining").hasRole("USER_PRO")
                         .requestMatchers("/statistiche_user").hasAnyRole("USER_BASIC", "USER_PRO")
-                        .requestMatchers("/gestione_update").hasAnyRole("USER_PROVA", "USER_BASIC")
+                        .requestMatchers("/gestione_upgrade").hasAnyRole("USER_PROVA", "USER_BASIC")
                         .requestMatchers("/dashboard_basic", "/upgrade_basic").hasRole("USER_BASIC")
                         .requestMatchers("/dashboard_prova", "/upgrade_prova").hasRole("USER_PROVA")
                         .anyRequest().permitAll()

@@ -8,6 +8,7 @@ import it.unitn.disi.webapp_team04.services.CheckUser;
 import it.unitn.disi.webapp_team04.services.Recensioni;
 import it.unitn.disi.webapp_team04.services.TrainingRest;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ public class UserDashboardController {
     TrainingRest trainingRest;
     Recensioni recensioni; //service
 
+    @Autowired
     public UserDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, CheckUser checkUser, TrainingRest trainingRest, Recensioni recensioni, RecensioneRepository recensioneRepository) {
         this.userRepository = userRepository;
         this.trainingRepository = trainingRepository;
@@ -297,5 +299,15 @@ public class UserDashboardController {
         response.put("redirect", "/dashboard");
 
         return response;
+    }
+
+    @GetMapping("/contatti_user")
+    public String contatti(Model model, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
+        model.addAttribute("authority", authentication.getAuthorities().iterator().next().getAuthority()); //per la navbar della view
+        model.addAttribute("activePage", "contatti_user");
+        return "private/user/contatti_user";
     }
 }

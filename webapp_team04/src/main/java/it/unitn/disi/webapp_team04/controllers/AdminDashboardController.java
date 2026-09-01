@@ -5,6 +5,7 @@ import it.unitn.disi.webapp_team04.pojos.TrainingStats;
 import it.unitn.disi.webapp_team04.repositories.TrainingRepository;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
 import it.unitn.disi.webapp_team04.services.TrainingRest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class AdminDashboardController {
     private final TrainingRepository trainingRepository;
     private final TrainingRest trainingRest;
 
+    @Autowired
     public AdminDashboardController(UserRepository userRepository, TrainingRepository trainingRepository, TrainingRest trainingRest) {
         this.userRepository = userRepository;
         this.trainingRepository = trainingRepository;

@@ -3,6 +3,7 @@ package it.unitn.disi.webapp_team04.services;
 import it.unitn.disi.webapp_team04.pojos.Recensione;
 import it.unitn.disi.webapp_team04.repositories.RecensioneRepository;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,7 @@ public class Recensioni {
     private final RecensioneRepository recensioneRepository;
     private final UserRepository userRepository;
 
+    @Autowired
     public Recensioni(RecensioneRepository recensioneRepository, UserRepository userRepository) {
         this.recensioneRepository = recensioneRepository;
         this.userRepository = userRepository;

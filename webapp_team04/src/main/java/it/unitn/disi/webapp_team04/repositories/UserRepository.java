@@ -3,6 +3,7 @@ package it.unitn.disi.webapp_team04.repositories;
 import it.unitn.disi.webapp_team04.pojos.SecurityUser;
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.rowmappers.ProfiloRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -19,6 +20,7 @@ public class UserRepository {
     private final UserDetailsManager userDetailsManager;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserRepository(JdbcTemplate jdbcTemplate, UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
         this.passwordEncoder = passwordEncoder;

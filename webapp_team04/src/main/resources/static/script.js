@@ -143,7 +143,7 @@ if (rimuoviUtenti) {
 }
 
 
-//gestione contatti
+//gestione contatti (public)
 const btnInvia = document.getElementById('btn-invia');
 const redirectUrl = /*[[@{/index}]]*/ '/index';
 
@@ -160,6 +160,27 @@ if (btnInvia) {
 
         alert("Grazie! Il tuo messaggio è stato inviato con successo.");
         window.location.href = redirectUrl;
+    });
+}
+
+
+//gestione contatti (private, user)
+const btnInviaUser = document.getElementById('btn-invia-user');
+const redirectUrlUser = /*[[@{/index}]]*/ '/dashboard';
+
+if (btnInviaUser) {
+    btnInviaUser.addEventListener('click', function () {
+        const nome = document.getElementById('uname').value.trim();
+        const email = document.getElementById('mail').value.trim();
+        const msg = document.getElementById('note').value.trim();
+
+        if (!nome || !email || !msg) {
+            alert("Compila tutti i campi prima di inviare.");
+            return;
+        }
+
+        alert("Grazie! Il tuo messaggio è stato inviato con successo.");
+        window.location.href = redirectUrlUser;
     });
 }
 
@@ -207,9 +228,6 @@ if (container && btnAdd) {
         const items = container.querySelectorAll('.esercizio-item');
         items.forEach((item, index) => {
             item.setAttribute('data-index', index);
-            /*item.querySelector('input[name*=".nome"]').name = `esercizi[${i}].nome`;
-            item.querySelector('input[name*=".serie"]').name = `esercizi[${i}].serie`;
-            item.querySelector('input[name*=".reps"]').name = `esercizi[${i}].reps`;*/
             const selectNome = item.querySelector('select[name*=".nome"]');
             if (selectNome) selectNome.name = `esercizi[${index}].nome`;
 
@@ -250,7 +268,7 @@ if (container && btnAdd) {
 
         div.innerHTML = `
             <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn btn-primary btn-remove">Rimuovi l'esercizio</button>
+                <button type="button" class="btn btn-primary btn-remove">Rimuovi esercizio</button>
             </div>
             <div class="col-md-3">
                 <label class="form-label small">Nome Esercizio</label>
@@ -410,8 +428,6 @@ if(canvasGrafico2){
         }
     });
 }
-
-
 
 
 //gestione invio recensione

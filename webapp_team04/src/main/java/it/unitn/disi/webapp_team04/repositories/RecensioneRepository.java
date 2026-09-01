@@ -2,6 +2,7 @@ package it.unitn.disi.webapp_team04.repositories;
 
 import it.unitn.disi.webapp_team04.pojos.Recensione;
 import it.unitn.disi.webapp_team04.rowmappers.RecensioneRowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.List;
 public class RecensioneRepository {
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public RecensioneRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

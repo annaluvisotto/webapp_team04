@@ -11,7 +11,7 @@ public class Programma {
     private String nome;
     private List<Esercizio> esercizi = new ArrayList<>();
 
-    public Programma() {}
+    public Programma(){}
 
     public Programma(int id, String nome) {
         this.id = id;

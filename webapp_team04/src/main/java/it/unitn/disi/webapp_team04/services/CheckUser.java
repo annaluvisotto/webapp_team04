@@ -2,6 +2,7 @@ package it.unitn.disi.webapp_team04.services;
 
 import it.unitn.disi.webapp_team04.pojos.User;
 import it.unitn.disi.webapp_team04.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public class CheckUser {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public CheckUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

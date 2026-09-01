@@ -2,15 +2,19 @@ package it.unitn.disi.webapp_team04.repositories;
 
 import it.unitn.disi.webapp_team04.pojos.Exercise;
 import it.unitn.disi.webapp_team04.pojos.Training;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import it.unitn.disi.webapp_team04.pojos.TrainingStats;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Repository
 public class TrainingRepository {
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public TrainingRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -134,6 +138,7 @@ public class TrainingRepository {
         }
     }
 
+    @Transactional
     public void incrementDefaultExec(String username, int trainingId) {
         String sqlId = "SELECT id FROM Authorities WHERE username = ?";
         Integer userId = jdbcTemplate.queryForObject(sqlId, Integer.class, username);
@@ -146,6 +151,7 @@ public class TrainingRepository {
         }
     }
 
+    @Transactional
     public void incrementPersonalizedExec(String username, int trainingId) {
         String sqlId = "SELECT id FROM Users WHERE username = ?";
         Integer userId = jdbcTemplate.queryForObject(sqlId, Integer.class, username);
@@ -160,6 +166,7 @@ public class TrainingRepository {
         return (count != null && count == 0);
     }
 
+    @Transactional
     public void savePersonalizedTraining(String username, Training training) {
         String sqlUser = "SELECT ID FROM Users WHERE username = ?";
         Integer userId = jdbcTemplate.queryForObject(sqlUser, Integer.class, username);

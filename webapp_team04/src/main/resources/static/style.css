@@ -200,7 +200,7 @@ hr.winx-divider {
     box-shadow: -8px 8px 0px var(--winx-accent) !important;
 }
 
-/* Stile del Box Messaggi */
+/*stile del box messaggi*/
 #message {
     display: none;
     background-color: var(--winx-card);
